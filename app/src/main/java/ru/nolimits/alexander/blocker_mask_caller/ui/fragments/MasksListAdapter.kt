@@ -29,7 +29,7 @@ class MaskViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var phoneMask: TextView? = null
 
     init {
-        phoneMask = itemView.findViewById(R.id.phone_mask_item)
+        phoneMask = itemView.findViewById(R.id.phone_mask_number)
     }
 
     fun bind(item: PhoneMask) {
