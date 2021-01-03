@@ -18,7 +18,7 @@ class MasksListFragment : Fragment() {
     )
 
     companion object {
-        fun newInstance() = MasksListFragment()
+        fun newInstance(): MasksListFragment = MasksListFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
