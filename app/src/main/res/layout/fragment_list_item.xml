@@ -15,8 +15,8 @@
         android:layout_marginEnd="24dp"
         android:textAlignment="textStart"
         android:textSize="24sp"
+        android:text="+7 999 99 99"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="+7 999 99 99" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
