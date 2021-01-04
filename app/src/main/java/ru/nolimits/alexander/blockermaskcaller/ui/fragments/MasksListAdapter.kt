@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blocker_mask_caller.ui.fragments
+package ru.nolimits.alexander.blockermaskcaller.ui.fragments
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

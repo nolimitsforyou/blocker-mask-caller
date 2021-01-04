@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blocker_mask_caller.ui
+package ru.nolimits.alexander.blockermaskcaller.ui
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes

@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blocker_mask_caller.ui.db
+package ru.nolimits.alexander.blockermaskcaller.database
 
 import androidx.room.*
 
