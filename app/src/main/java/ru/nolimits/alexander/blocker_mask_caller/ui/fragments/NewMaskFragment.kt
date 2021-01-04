@@ -5,20 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_new_mask.*
 import ru.nolimits.alexander.blocker_mask_caller.R
-import kotlinx.android.synthetic.main.fragment_list_masks.*
 
-class MasksListFragment : Fragment() {
-
-    //TODO for testing
-    private val phoneNumbers = listOf(
-        PhoneMask("+7 999 99 99", "firstName"),
-        PhoneMask("+7 888 88 88", "secondName")
-    )
+class NewMaskFragment : Fragment() {
 
     companion object {
-        fun newInstance(): MasksListFragment = MasksListFragment()
+        fun newInstance(): NewMaskFragment = NewMaskFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +24,13 @@ class MasksListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_list_masks, container, false)
+        return inflater.inflate(R.layout.fragment_new_mask, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        masks_recyclerview.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = MasksListAdapter(phoneNumbers)
+        new_mask_form.apply {
+            //TODO
         }
     }
 }
