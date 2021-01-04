@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <EditText
         android:id="@+id/name_mask"
         android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:text="маска"
         app:layout_constraintBottom_toTopOf="@+id/phone_mask"
@@ -20,13 +20,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/phone_mask"
         android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:text="номер"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +34,8 @@
 
     <Button
         android:id="@+id/button_add"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -46,8 +46,8 @@
 
     <Button
         android:id="@+id/button_delete"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
