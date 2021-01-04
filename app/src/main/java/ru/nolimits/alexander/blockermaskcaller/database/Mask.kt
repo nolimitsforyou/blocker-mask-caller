@@ -1,6 +1,7 @@
 package ru.nolimits.alexander.blockermaskcaller.database
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Entity(tableName = "masks_table")
 data class Mask(
@@ -10,7 +11,7 @@ data class Mask(
 )
 
 @Dao
-interface MasksDao {
+interface MaskDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertNewMask(mask: Mask)
@@ -22,5 +23,5 @@ interface MasksDao {
     fun updateMask(mask: Mask)
 
     @Query("SELECT * FROM masks_table")
-    fun getAllMasks(): List<Mask>
+    fun getAllMasks(): Flow<List<Mask>>
 }

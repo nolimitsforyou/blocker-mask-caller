@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = arrayOf(Mask::class), version = 1)
 abstract class AppDataBase : RoomDatabase() {
 
-    abstract fun masksDao(): MasksDao
+    abstract fun masksDao(): MaskDao
 
     companion object {
 
