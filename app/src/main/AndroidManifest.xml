@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.nolimits.alexander.blocker_mask_caller">
+    package="ru.nolimits.alexander.blockermaskcaller">
 
     <application
-        android:name="ru.nolimits.alexander.blocker_mask_caller.ru.nolimits.alexander.blockermaskcaller.db.MasksApplication"
+        android:name=".database.MasksApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BlockerMaskCaller">
-        <activity android:name="ru.nolimits.alexander.blockermaskcaller.ui.MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

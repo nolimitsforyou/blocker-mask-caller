@@ -3,7 +3,7 @@ package ru.nolimits.alexander.blockermaskcaller.data.view.models
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
-import ru.nolimits.alexander.blockermaskcaller.database.MasksRepository
+import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 
 class MaskViewModel(private val repository: MasksRepository) : ViewModel() {
 
