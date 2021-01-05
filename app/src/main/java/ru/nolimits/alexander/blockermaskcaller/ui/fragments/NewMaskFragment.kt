@@ -1,7 +1,6 @@
 package ru.nolimits.alexander.blockermaskcaller.ui.fragments
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_new_mask.*
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.view.models.NewMaskViewModel
 import ru.nolimits.alexander.blockermaskcaller.data.view.models.NewMaskViewModelFactory
+import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.database.MasksApplication
 
 
@@ -44,9 +44,9 @@ class NewMaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_add.setOnClickListener {
-            val replyIntent = Intent()
             if (!TextUtils.isEmpty(phone_mask.text)) {
-                val mask = phone_mask.text.toString()
+                val mask = Mask(numeric = phone_mask.text.toString(), title = name_mask.text.toString())
+                newMaskViewModel.insert(mask)
                 //TODO писать в БД
             } else {
                 //TODO сделать если не заполнено поле

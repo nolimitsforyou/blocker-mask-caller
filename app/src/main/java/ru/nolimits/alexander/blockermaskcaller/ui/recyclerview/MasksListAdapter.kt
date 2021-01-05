@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ru.nolimits.alexander.blocker_mask_caller.R
+import kotlinx.android.synthetic.main.fragment_list_item.view.*
+import ru.nolimits.alexander.blockermaskcaller.R
+import ru.nolimits.alexander.blockermaskcaller.database.Mask
 
-class MasksListAdapter(private val list: List<PhoneMask>) : RecyclerView.Adapter<MaskViewHolder>() {
+class MasksListAdapter(private val list: List<Mask>) : RecyclerView.Adapter<MaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaskViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -14,7 +16,7 @@ class MasksListAdapter(private val list: List<PhoneMask>) : RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: MaskViewHolder, position: Int) {
-        val phoneMask: PhoneMask = list[position]
+        val phoneMask: Mask = list[position]
         holder.bind(phoneMask)
     }
 
@@ -29,10 +31,10 @@ class MaskViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var phoneMask: TextView? = null
 
     init {
-        phoneMask = itemView.findViewById(R.id.phone_mask_number)
+        phoneMask = itemView.phone_mask_number
     }
 
-    fun bind(item: PhoneMask) {
-        phoneMask?.text = item.mask
+    fun bind(item: Mask) {
+        phoneMask?.text = item.numeric
     }
 }
