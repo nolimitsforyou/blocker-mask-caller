@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Entity(tableName = "masks_table")
 data class Mask(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo val numeric: String?,
     @ColumnInfo val title: String?
 )
@@ -24,4 +24,7 @@ interface MaskDao {
 
     @Query("SELECT * FROM masks_table")
     fun getAllMasks(): Flow<List<Mask>>
+
+    @Query("DELETE FROM masks_table")
+    suspend fun deleteAll()
 }
