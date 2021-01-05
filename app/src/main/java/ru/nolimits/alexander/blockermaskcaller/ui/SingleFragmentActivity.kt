@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import ru.nolimits.alexander.blocker_mask_caller.R
+import ru.nolimits.alexander.blockermaskcaller.R
 
 abstract class SingleFragmentActivity : AppCompatActivity() {
 
