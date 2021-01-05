@@ -14,7 +14,7 @@ class ListMasksViewModelFactory(private val repository: MasksRepository) : ViewM
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ListMasksViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return NewMaskViewModel(repository) as T
+            return ListMasksViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
