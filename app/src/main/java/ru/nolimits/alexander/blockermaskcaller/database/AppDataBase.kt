@@ -22,6 +22,7 @@ abstract class AppDataBase : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
 
+                    //TODO только для тестирования
                     var maskDao = database.masksDao()
                     maskDao.deleteAll()
                     var mask = Mask(numeric = "999888", title = "Петуханыч")
