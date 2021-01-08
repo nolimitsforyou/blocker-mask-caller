@@ -11,24 +11,19 @@ import androidx.fragment.app.viewModels
 import kotlinx.android.synthetic.main.fragment_new_mask.*
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
-import ru.nolimits.alexander.blockermaskcaller.database.MasksApplication
+import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 
 
 class ItemMaskFragment : Fragment() {
 
-    private val application = requireActivity().application
 
-    private val newMaskViewModel: NewMaskViewModel by viewModels {
-        NewMaskViewModelFactory((application as MasksApplication).repository)
-    }
+//    private val newMaskViewModel: ItemMaskViewModel by viewModels {
+//        NewMaskViewModelFactory((application as PhoneMasksApplication).repository)
+//    }
 
     companion object {
         fun newInstance(): ItemMaskFragment = ItemMaskFragment()
         const val EXTRA_REPLY = "ru.nolimits.alexander.blockermaskcaller.REPLY"
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -44,7 +39,7 @@ class ItemMaskFragment : Fragment() {
         button_add.setOnClickListener {
             if (!TextUtils.isEmpty(phone_mask.text)) {
                 val mask = Mask(numeric = phone_mask.text.toString(), title = name_mask.text.toString())
-                newMaskViewModel.insert(mask)
+//                newMaskViewModel.insert(mask)
                 //TODO писать в БД
             } else {
                 //TODO сделать если не заполнено поле

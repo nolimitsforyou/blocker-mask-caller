@@ -9,9 +9,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Database(entities = arrayOf(Mask::class), version = 1)
-abstract class AppDataBase : RoomDatabase() {
+abstract class PhoneMasksDataBase : RoomDatabase() {
 
-    abstract fun masksDao(): MaskDao
+    abstract val masksDao: MaskDao
 
     private class WordDatabaseCallback(
         private val scope: CoroutineScope
@@ -23,7 +23,7 @@ abstract class AppDataBase : RoomDatabase() {
                 scope.launch {
 
                     //TODO только для тестирования
-                    var maskDao = database.masksDao()
+                    var maskDao = database.masksDao
                     maskDao.deleteAll()
                     var mask = Mask(numeric = "999888", title = "Петуханыч")
                     maskDao.insertNewMask(mask)
@@ -37,16 +37,16 @@ abstract class AppDataBase : RoomDatabase() {
     companion object {
 
         @Volatile
-        private var INSTANCE: AppDataBase? = null
+        private var INSTANCE: PhoneMasksDataBase? = null
 
         fun getDataBase(
             context: Context,
             scope: CoroutineScope
-        ): AppDataBase {
+        ): PhoneMasksDataBase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    AppDataBase::class.java,
+                    PhoneMasksDataBase::class.java,
                     "masks_database"
                 )
                     .addCallback(WordDatabaseCallback(scope))

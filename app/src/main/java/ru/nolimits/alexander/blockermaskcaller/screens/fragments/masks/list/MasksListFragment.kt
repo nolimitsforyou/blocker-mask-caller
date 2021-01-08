@@ -9,18 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_list_masks.*
+import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
 
 class MasksListFragment : Fragment() {
 
-    private val application = activity?.application
-
-    private lateinit var listMasksViewModel: ListMasksViewModel
-
-//    private val listMasksViewModel: ListMasksViewModel by viewModels {
-//        ListMasksViewModelFactory((application as MasksApplication).repository)
-//    }
+    private lateinit var viewModel: ListMasksViewModel
+    private lateinit var viewModelFactory: ListMasksViewModelFactory
 
     companion object {
         fun newInstance(): MasksListFragment = MasksListFragment()
@@ -31,8 +27,12 @@ class MasksListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val app = activity?.applicationContext
+        viewModelFactory = ListMasksViewModelFactory((app as PhoneMasksApplication).repository)
+
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
-        listMasksViewModel = ViewModelProvider(this).get(ListMasksViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ListMasksViewModel::class.java)
         return inflater.inflate(R.layout.fragment_list_masks, container, false)
     }
 
@@ -45,7 +45,7 @@ class MasksListFragment : Fragment() {
             adapter = adapterMasks
         }
 
-        listMasksViewModel.allMasks.observe(viewLifecycleOwner, {
+        viewModel.allMasks.observe(viewLifecycleOwner, {
             it?.let {
                 adapterMasks.refreshPhoneMasks(it)
             }

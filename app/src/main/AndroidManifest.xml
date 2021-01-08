@@ -3,7 +3,7 @@
     package="ru.nolimits.alexander.blockermaskcaller">
 
     <application
-        android:name=".database.MasksApplication"
+        android:name=".PhoneMasksApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

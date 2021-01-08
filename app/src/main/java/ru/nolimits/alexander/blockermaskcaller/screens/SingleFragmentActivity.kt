@@ -17,7 +17,6 @@ abstract class SingleFragmentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId)
-
         val fm = supportFragmentManager
         var fragment = fm.findFragmentById(R.id.fragment_container_view)
         // ensures fragments already created will not be created
