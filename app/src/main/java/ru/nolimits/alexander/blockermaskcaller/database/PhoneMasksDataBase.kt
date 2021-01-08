@@ -21,14 +21,7 @@ abstract class PhoneMasksDataBase : RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-
-                    //TODO только для тестирования
-//                    var maskDao = database.masksDao
-//                    maskDao.deleteAll()
-//                    var mask = Mask(numeric = "111", title = "Петуханыч")
-//                    maskDao.insertNewMask(mask)
-//                    mask = Mask(numeric = "222", title = "Братаныч")
-//                    maskDao.insertNewMask(mask)
+                //тут можно получать данные из сети если это предусмотрено
                 }
             }
         }

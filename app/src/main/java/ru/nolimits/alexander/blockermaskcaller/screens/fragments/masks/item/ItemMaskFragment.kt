@@ -40,8 +40,8 @@ class ItemMaskFragment : Fragment() {
         button_add.setOnClickListener {
             if (!TextUtils.isEmpty(phone_mask.text)) {
                 val mask = Mask(numeric = phone_mask.text.toString(), title = name_mask.text.toString())
-//                newMaskViewModel.insert(mask)
-                //TODO писать в БД
+                viewModel.insert(mask)
+                //TODO после сохранения кидать на франкмент со списком
             } else {
                 //TODO сделать если не заполнено поле
                 AlertDialog.BUTTON_POSITIVE

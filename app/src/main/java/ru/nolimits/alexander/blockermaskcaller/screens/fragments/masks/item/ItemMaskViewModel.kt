@@ -2,12 +2,18 @@ package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
 
 import android.util.Log
 import androidx.lifecycle.*
+import kotlinx.coroutines.launch
+import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 
 class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
 
     init {
         Log.i("NewMaskViewModel", "NewMaskViewModel created!")
+    }
+
+    fun insert(mask: Mask) = viewModelScope.launch {
+        repository.insert(mask)
     }
 
     override fun onCleared() {
