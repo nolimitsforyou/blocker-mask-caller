@@ -28,9 +28,8 @@ class MasksListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val app = activity?.applicationContext
-        viewModelFactory = ListMasksViewModelFactory((app as PhoneMasksApplication).repository)
-
+        viewModelFactory =
+            ListMasksViewModelFactory((activity?.applicationContext as PhoneMasksApplication).repository)
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
         viewModel = ViewModelProvider(this, viewModelFactory).get(ListMasksViewModel::class.java)
         return inflater.inflate(R.layout.fragment_list_masks, container, false)

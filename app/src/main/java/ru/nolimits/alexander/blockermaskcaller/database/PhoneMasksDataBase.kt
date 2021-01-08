@@ -23,12 +23,12 @@ abstract class PhoneMasksDataBase : RoomDatabase() {
                 scope.launch {
 
                     //TODO только для тестирования
-                    var maskDao = database.masksDao
-                    maskDao.deleteAll()
-                    var mask = Mask(numeric = "999888", title = "Петуханыч")
-                    maskDao.insertNewMask(mask)
-                    mask = Mask(numeric = "123456", title = "Братаныч")
-                    maskDao.insertNewMask(mask)
+//                    var maskDao = database.masksDao
+//                    maskDao.deleteAll()
+//                    var mask = Mask(numeric = "111", title = "Петуханыч")
+//                    maskDao.insertNewMask(mask)
+//                    mask = Mask(numeric = "222", title = "Братаныч")
+//                    maskDao.insertNewMask(mask)
                 }
             }
         }
@@ -47,7 +47,7 @@ abstract class PhoneMasksDataBase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PhoneMasksDataBase::class.java,
-                    "masks_database"
+                    "phone_masks_database"
                 )
                     .addCallback(WordDatabaseCallback(scope))
                     .build()

@@ -16,7 +16,7 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
     }
 }
 
-class NewMaskViewModelFactory(private val repository: MasksRepository) : ViewModelProvider.Factory {
+class ItemMaskViewModelFactory(private val repository: MasksRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ItemMaskViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
