@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller.ui.fragments
+package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,13 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import kotlinx.android.synthetic.main.fragment_new_mask.*
 import ru.nolimits.alexander.blockermaskcaller.R
-import ru.nolimits.alexander.blockermaskcaller.data.view.models.NewMaskViewModel
-import ru.nolimits.alexander.blockermaskcaller.data.view.models.NewMaskViewModelFactory
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.database.MasksApplication
 
 
-class NewMaskFragment : Fragment() {
+class ItemMaskFragment : Fragment() {
 
     private val application = requireActivity().application
 
@@ -25,7 +23,7 @@ class NewMaskFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): NewMaskFragment = NewMaskFragment()
+        fun newInstance(): ItemMaskFragment = ItemMaskFragment()
         const val EXTRA_REPLY = "ru.nolimits.alexander.blockermaskcaller.REPLY"
     }
 
