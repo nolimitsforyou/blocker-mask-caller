@@ -1,7 +1,8 @@
 package ru.nolimits.alexander.blockermaskcaller.repository
 
-import androidx.annotation.WorkerThread
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.database.PhoneMasksDataBase
 
@@ -14,9 +15,9 @@ class MasksRepository(private val database: PhoneMasksDataBase) {
 
     val allMasks: Flow<List<Mask>> = database.masksDao.getAllMasks()
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun insert(mask: Mask) {
-        database.masksDao.insertNewMask(mask)
+        withContext(Dispatchers.IO) {
+            database.masksDao.insertNewMask(mask)
+        }
     }
 }

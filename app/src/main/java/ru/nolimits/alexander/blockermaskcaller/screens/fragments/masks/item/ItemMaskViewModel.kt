@@ -12,8 +12,10 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
         Log.i("NewMaskViewModel", "NewMaskViewModel created!")
     }
 
-    fun insert(mask: Mask) = viewModelScope.launch {
-        repository.insert(mask)
+    fun insert(mask: Mask) {
+        viewModelScope.launch {
+            repository.insert(mask)
+        }
     }
 
     override fun onCleared() {
@@ -22,7 +24,8 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
     }
 }
 
-class ItemMaskViewModelFactory(private val repository: MasksRepository) : ViewModelProvider.Factory {
+class ItemMaskViewModelFactory(private val repository: MasksRepository) :
+    ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ItemMaskViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
