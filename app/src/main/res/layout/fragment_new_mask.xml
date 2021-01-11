@@ -8,6 +8,7 @@
 
     <EditText
         android:id="@+id/name_mask"
+        android:hint="Имя"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,6 +22,7 @@
 
     <EditText
         android:id="@+id/phone_mask"
+        android:hint="7 999 888"
         android:inputType = "number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +36,7 @@
 
     <Button
         android:id="@+id/button_add"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
@@ -46,7 +48,7 @@
 
     <Button
         android:id="@+id/button_delete"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"

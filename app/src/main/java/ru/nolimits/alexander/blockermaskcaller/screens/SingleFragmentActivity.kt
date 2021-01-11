@@ -36,6 +36,7 @@ abstract class SingleFragmentActivity : AppCompatActivity() {
         }
     }
 
+    //TODO тут разобраться как получать правлиьно кол-во записей в БД (SharedPreferences ???)
     private fun setUp() {
         val app = application as PhoneMasksApplication
         val masksPhone = app.repository.allMasks
