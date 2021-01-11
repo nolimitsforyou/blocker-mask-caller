@@ -39,6 +39,10 @@ class MasksListFragment : Fragment() {
                 }
                 true
             }
+            R.id.delete_all_masks -> {
+                //TODO удалять все записи из БД
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

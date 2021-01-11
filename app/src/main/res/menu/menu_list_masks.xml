@@ -3,6 +3,8 @@
 
     <item
         android:id="@+id/add_new_mask"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="Add" />
+        android:title="Add New" />
+    <item
+        android:id="@+id/delete_all_masks"
+        android:title="Delete All" />
 </menu>
