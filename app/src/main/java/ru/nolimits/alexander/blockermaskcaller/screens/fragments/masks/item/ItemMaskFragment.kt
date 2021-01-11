@@ -49,10 +49,11 @@ class ItemMaskFragment : Fragment() {
 
         button_add.setOnClickListener {
             if (!TextUtils.isEmpty(phone_mask.text)) {
+
                 val mask =
                     Mask(numeric = phone_mask.text.toString(), title = name_mask.text.toString())
                 viewModel.insert(mask)
-                //TODO после сохранения кидать на фрагмент со списком + сделать валидацию
+
                 fragmentManager.commit {
                     replace(R.id.fragment_container_view, MasksListFragment.newInstance())
                 }
