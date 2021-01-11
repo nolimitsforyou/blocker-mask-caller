@@ -32,6 +32,7 @@ class MasksAdapter(private var masks: List<Mask> = ArrayList()) :
 
     class MaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(mask: Mask) = with(itemView) {
+            phone_mask_name.text = mask.title
             phone_mask_number.text = mask.numeric
         }
     }

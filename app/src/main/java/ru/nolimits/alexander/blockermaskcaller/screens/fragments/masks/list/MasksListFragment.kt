@@ -34,6 +34,7 @@ class MasksListFragment : Fragment() {
         return when (item.itemId) {
             R.id.add_new_mask -> {
                 fm.commit {
+                    addToBackStack(null)
                     replace(R.id.fragment_container_view, ItemMaskFragment.newInstance())
                 }
                 true
