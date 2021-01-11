@@ -21,10 +21,16 @@ class ItemMaskFragment : Fragment() {
 
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
+    private lateinit var fm: FragmentManager
 
     companion object {
         fun newInstance(): ItemMaskFragment = ItemMaskFragment()
         const val TAG_ITEM_MASK = "masks_list_fragment"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        fm = activity?.supportFragmentManager!!
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -45,8 +51,6 @@ class ItemMaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fragmentManager = activity?.supportFragmentManager!!
-
         button_add.setOnClickListener {
             if (!TextUtils.isEmpty(phone_mask.text)) {
 
@@ -54,7 +58,7 @@ class ItemMaskFragment : Fragment() {
                     Mask(numeric = phone_mask.text.toString(), title = name_mask.text.toString())
                 viewModel.insert(mask)
 
-                fragmentManager.commit {
+                fm.commit {
                     replace(R.id.fragment_container_view, MasksListFragment.newInstance())
                 }
 
