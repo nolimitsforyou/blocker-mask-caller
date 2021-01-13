@@ -22,7 +22,6 @@ class MasksListFragment : Fragment() {
 
     companion object {
         fun newInstance(): MasksListFragment = MasksListFragment()
-        const val TAG_LIST_MASKS = "masks_list_fragment"
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

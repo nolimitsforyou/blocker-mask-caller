@@ -25,7 +25,6 @@ class ItemMaskFragment : Fragment() {
 
     companion object {
         fun newInstance(): ItemMaskFragment = ItemMaskFragment()
-        const val TAG_ITEM_MASK = "masks_list_fragment"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
