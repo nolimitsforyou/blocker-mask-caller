@@ -26,5 +26,5 @@ interface MaskDao {
     fun getAllMasks(): Flow<List<Mask>>
 
     @Query("DELETE FROM masks_table")
-    suspend fun deleteAll()
+    fun deleteAll()
 }
