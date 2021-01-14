@@ -8,8 +8,11 @@ import kotlinx.android.synthetic.main.fragment_list_item.view.*
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 
-class MasksAdapter(private var masks: List<Mask> = ArrayList()) :
-    RecyclerView.Adapter<MasksAdapter.MaskHolder>() {
+
+class MasksAdapter(
+    private var masks: List<Mask> = ArrayList(),
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<MasksAdapter.MaskHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaskHolder {
         return MaskHolder(
@@ -30,10 +33,26 @@ class MasksAdapter(private var masks: List<Mask> = ArrayList()) :
         notifyDataSetChanged()
     }
 
-    class MaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+   inner class MaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+       init {
+           itemView.setOnClickListener(this)
+       }
+
         fun bind(mask: Mask) = with(itemView) {
             phone_mask_name.text = mask.title
             phone_mask_number.text = mask.numeric
         }
+
+       override fun onClick(v: View?) {
+           val position = adapterPosition
+           if (position != RecyclerView.NO_POSITION) {
+               listener.onItemClick(position)
+           }
+       }
+   }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }

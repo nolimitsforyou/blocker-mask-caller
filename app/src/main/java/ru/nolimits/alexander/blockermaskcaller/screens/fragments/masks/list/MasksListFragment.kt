@@ -14,7 +14,7 @@ import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
 
-class MasksListFragment : Fragment() {
+class MasksListFragment : Fragment(), MasksAdapter.OnItemClickListener {
 
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var viewModelFactory: ListMasksViewModelFactory
@@ -67,7 +67,7 @@ class MasksListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapterMasks = MasksAdapter()
+        val adapterMasks = MasksAdapter(listener = this)
 
         masks_recyclerview.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -79,5 +79,12 @@ class MasksListFragment : Fragment() {
                 adapterMasks.refreshPhoneMasks(it)
             }
         })
+    }
+
+    override fun onItemClick(position: Int) {
+        fm.commit {
+            addToBackStack(null)
+            replace(R.id.fragment_container_view, ItemMaskFragment.newInstance())
+        }
     }
 }
