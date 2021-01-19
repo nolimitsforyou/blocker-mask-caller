@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_list_masks.*
 import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
+import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
 
-class MasksListFragment : Fragment(), MasksAdapter.OnItemClickListener {
+class MasksListFragment : Fragment() {
 
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var viewModelFactory: ListMasksViewModelFactory
@@ -67,7 +68,11 @@ class MasksListFragment : Fragment(), MasksAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapterMasks = MasksAdapter(listener = this)
+        val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
+            override fun onItemClicked(item: Mask) {
+                //TODO тут надо вызывать фрагмент с данными
+            }
+        })
 
         masks_recyclerview.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -79,12 +84,5 @@ class MasksListFragment : Fragment(), MasksAdapter.OnItemClickListener {
                 adapterMasks.refreshPhoneMasks(it)
             }
         })
-    }
-
-    override fun onItemClick(position: Int) {
-        fm.commit {
-            addToBackStack(null)
-            replace(R.id.fragment_container_view, ItemMaskFragment.newInstance())
-        }
     }
 }
