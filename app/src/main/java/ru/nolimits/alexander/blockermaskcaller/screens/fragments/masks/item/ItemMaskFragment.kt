@@ -7,9 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
+import androidx.fragment.app.*
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_new_mask.*
 import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
@@ -23,6 +22,8 @@ class ItemMaskFragment : Fragment() {
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     companion object {
         fun newInstance(): ItemMaskFragment = ItemMaskFragment()
@@ -51,12 +52,10 @@ class ItemMaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
-        sharedViewModel.phoneMask.observe(viewLifecycleOwner,
-            {
-                name_mask.setText(it.title)
-                phone_mask.setText(it.numeric)
-            })
+        sharedViewModel.phoneMask.observe(viewLifecycleOwner, { mask ->
+            name_mask.setText(mask.title)
+            phone_mask.setText(mask.numeric)
+        })
 
         button_add.setOnClickListener {
 

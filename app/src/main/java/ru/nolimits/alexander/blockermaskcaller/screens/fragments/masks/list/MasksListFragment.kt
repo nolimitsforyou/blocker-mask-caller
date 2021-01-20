@@ -3,9 +3,7 @@ package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
+import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_list_masks.*
@@ -22,7 +20,7 @@ class MasksListFragment : Fragment() {
     private lateinit var viewModelFactory: ListMasksViewModelFactory
     private lateinit var fm: FragmentManager
 
-    private var sharedViewModel: SharedViewModel?=null
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     companion object {
         fun newInstance(): MasksListFragment = MasksListFragment()
@@ -62,8 +60,6 @@ class MasksListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        sharedViewModel= ViewModelProvider(this).get(SharedViewModel::class.java)
-
         viewModelFactory =
             ListMasksViewModelFactory((activity?.applicationContext as PhoneMasksApplication).repository)
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
@@ -76,8 +72,7 @@ class MasksListFragment : Fragment() {
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
                 //TODO тут открыть редактирование
-                sharedViewModel!!.setMask(item)
-
+                sharedViewModel.setMask(item)
                 fm.commit {
                     addToBackStack(null)
                     replace(R.id.fragment_container_view, ItemMaskFragment.newInstance())
