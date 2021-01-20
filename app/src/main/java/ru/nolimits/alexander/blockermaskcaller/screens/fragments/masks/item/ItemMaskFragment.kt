@@ -16,6 +16,7 @@ import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment
+import ru.nolimits.alexander.blockermaskcaller.shared.SharedViewModel
 
 class ItemMaskFragment : Fragment() {
 
@@ -50,7 +51,15 @@ class ItemMaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+        sharedViewModel.phoneMask.observe(viewLifecycleOwner,
+            {
+                name_mask.setText(it.title)
+                phone_mask.setText(it.numeric)
+            })
+
         button_add.setOnClickListener {
+
             if (!TextUtils.isEmpty(phone_mask.text)) {
 
                 val mask =

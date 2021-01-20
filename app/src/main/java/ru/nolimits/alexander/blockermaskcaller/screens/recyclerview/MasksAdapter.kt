@@ -31,7 +31,6 @@ class MasksAdapter(
         notifyDataSetChanged()
     }
 
-    //реализация Адаптера
     inner class MaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val maskNameTextView: TextView = itemView.findViewById(R.id.phone_mask_name)
         private val maskNumberTextView: TextView = itemView.findViewById(R.id.phone_mask_number)

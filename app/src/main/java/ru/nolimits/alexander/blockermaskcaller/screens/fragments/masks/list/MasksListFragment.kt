@@ -14,12 +14,15 @@ import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
+import ru.nolimits.alexander.blockermaskcaller.shared.SharedViewModel
 
 class MasksListFragment : Fragment() {
 
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var viewModelFactory: ListMasksViewModelFactory
     private lateinit var fm: FragmentManager
+
+    private var sharedViewModel: SharedViewModel?=null
 
     companion object {
         fun newInstance(): MasksListFragment = MasksListFragment()
@@ -59,6 +62,8 @@ class MasksListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        sharedViewModel= ViewModelProvider(this).get(SharedViewModel::class.java)
+
         viewModelFactory =
             ListMasksViewModelFactory((activity?.applicationContext as PhoneMasksApplication).repository)
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
@@ -70,7 +75,13 @@ class MasksListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
-                //TODO тут надо вызывать фрагмент с данными
+                //TODO тут открыть редактирование
+                sharedViewModel!!.setMask(item)
+
+                fm.commit {
+                    addToBackStack(null)
+                    replace(R.id.fragment_container_view, ItemMaskFragment.newInstance())
+                }
             }
         })
 
