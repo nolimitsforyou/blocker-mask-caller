@@ -8,25 +8,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_new_mask.*
 import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment
-import ru.nolimits.alexander.blockermaskcaller.shared.SharedViewModel
+import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment.Companion.MASK_ID
 
 class ItemMaskFragment : Fragment() {
 
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
-
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var mask: Mask
+    private var idMask: Long? = null
 
     companion object {
-        fun newInstance(): ItemMaskFragment = ItemMaskFragment()
+
+        const val MASK_ID = "mask_id"
+
+        fun newInstance(idMask: Int? = null): ItemMaskFragment {
+            val bundle = Bundle()
+            bundle.putSerializable(MASK_ID, idMask)
+            val fr = ItemMaskFragment()
+            fr.arguments = bundle
+            return fr
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,22 +54,18 @@ class ItemMaskFragment : Fragment() {
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
 
+
         return inflater.inflate(R.layout.fragment_new_mask, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel.phoneMask.observe(viewLifecycleOwner, { mask ->
-            name_mask.setText(mask.title)
-            phone_mask.setText(mask.numeric)
-        })
-
         button_add.setOnClickListener {
 
             if (!TextUtils.isEmpty(phone_mask.text)) {
 
-                val mask =
+                mask =
                     Mask(numeric = phone_mask.text.toString(), title = name_mask.text.toString())
                 viewModel.insert(mask)
 

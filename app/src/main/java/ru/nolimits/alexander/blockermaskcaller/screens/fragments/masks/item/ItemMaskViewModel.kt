@@ -18,6 +18,14 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
         }
     }
 
+    fun getMaskById(idMask: Int): Mask {
+        lateinit var m: Mask
+        viewModelScope.launch {
+            m = repository.getMaskById(idMask)
+        }
+        return m
+    }
+
     override fun onCleared() {
         super.onCleared()
         Log.i("NewMaskViewModel", "NewMaskViewModel destroyed!")

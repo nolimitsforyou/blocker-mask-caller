@@ -21,9 +21,16 @@ class MasksRepository(private val database: PhoneMasksDataBase) {
             database.masksDao.insertNewMask(mask)
         }
     }
+
     suspend fun deleteAll() {
         withContext(Dispatchers.IO) {
             database.masksDao.deleteAll()
+        }
+    }
+
+    suspend fun getMaskById(idMask: Int) : Mask {
+        return withContext(Dispatchers.IO) {
+            database.masksDao.getMaskById(idMask)
         }
     }
 }
