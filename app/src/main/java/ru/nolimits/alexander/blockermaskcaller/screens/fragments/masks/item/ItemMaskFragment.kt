@@ -14,7 +14,6 @@ import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment
-import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment.Companion.MASK_ID
 
 class ItemMaskFragment : Fragment() {
 
@@ -22,15 +21,15 @@ class ItemMaskFragment : Fragment() {
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
     private lateinit var mask: Mask
-    private var idMask: Long? = null
+    private var idMask: Int? = null
 
     companion object {
 
         const val MASK_ID = "mask_id"
 
-        fun newInstance(idMask: Int? = null): ItemMaskFragment {
+        fun newInstance(maskId: Int? = null): ItemMaskFragment {
             val bundle = Bundle()
-            bundle.putSerializable(MASK_ID, idMask)
+            maskId?.let { bundle.putInt(MASK_ID, maskId) }
             val fr = ItemMaskFragment()
             fr.arguments = bundle
             return fr
@@ -54,6 +53,12 @@ class ItemMaskFragment : Fragment() {
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
 
+        idMask = arguments?.getInt(MASK_ID)
+
+        idMask?.let {
+            mask = viewModel.getMaskById(it)
+            name_mask.setText(mask.title)
+        }
 
         return inflater.inflate(R.layout.fragment_new_mask, container, false)
     }

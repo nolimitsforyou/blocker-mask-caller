@@ -12,6 +12,7 @@ import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
+import ru.nolimits.alexander.blockermaskcaller.shared.Communicator
 
 class MasksListFragment : Fragment() {
 
@@ -19,9 +20,11 @@ class MasksListFragment : Fragment() {
     private lateinit var viewModelFactory: ListMasksViewModelFactory
     private lateinit var fm: FragmentManager
 
+    private lateinit var communicator: Communicator
+
+
     companion object {
         fun newInstance(): MasksListFragment = MasksListFragment()
-        const val MASK_ID = "mask_id"
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -58,6 +61,8 @@ class MasksListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        communicator = activity as Communicator
+
         viewModelFactory =
             ListMasksViewModelFactory((activity?.applicationContext as PhoneMasksApplication).repository)
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
@@ -72,11 +77,15 @@ class MasksListFragment : Fragment() {
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
                 //TODO тут открыть редактирование маски
-                val fr = ItemMaskFragment.newInstance(item.id)
-                fm.commit {
-                    addToBackStack(null)
-                    replace(R.id.fragment_container_view, fr)
-                }
+
+                communicator.sendData(item)
+
+//                val fr = ItemMaskFragment.newInstance()
+//
+//                fm.commit {
+//                    addToBackStack(null)
+//                    replace(R.id.fragment_container_view, fr)
+//                }
             }
         })
 
