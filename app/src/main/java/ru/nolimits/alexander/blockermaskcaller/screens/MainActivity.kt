@@ -16,7 +16,7 @@ class MainActivity : SingleFragmentActivity(), Communicator {
     }
 
     override fun sendData(mask: Mask) {
-        val fr = ItemMaskFragment.newInstance(mask.id)
+        val fr = ItemMaskFragment.newInstance(mask)
         supportFragmentManager.commit {
             addToBackStack(null)
             replace(R.id.fragment_container_view, fr)

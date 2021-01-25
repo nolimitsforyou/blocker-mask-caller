@@ -14,7 +14,7 @@ data class Mask(
 interface MaskDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertNewMask(mask: Mask)
+    fun insertMask(mask: Mask)
 
     @Delete
     fun deleteMask(mask: Mask)

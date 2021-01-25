@@ -21,15 +21,24 @@ class ItemMaskFragment : Fragment() {
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
     private lateinit var mask: Mask
+
     private var idMask: Int? = null
+    private var titleMask: String? = null
+    private var numericMask: String? = null
 
     companion object {
 
         const val MASK_ID = "mask_id"
+        const val MASK_TITLE = "mask_title"
+        const val MASK_NUMERIC = "mask_numeric"
 
-        fun newInstance(maskId: Int? = null): ItemMaskFragment {
+        fun newInstance(mask: Mask? = null): ItemMaskFragment {
             val bundle = Bundle()
-            maskId?.let { bundle.putInt(MASK_ID, maskId) }
+            mask?.let {
+                bundle.putInt(MASK_ID, mask.id)
+                bundle.putString(MASK_TITLE, mask.title)
+                bundle.putString(MASK_NUMERIC, mask.numeric)
+            }
             val fr = ItemMaskFragment()
             fr.arguments = bundle
             return fr
@@ -54,11 +63,15 @@ class ItemMaskFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
 
         idMask = arguments?.getInt(MASK_ID)
+        titleMask = arguments?.getString(MASK_TITLE)
+        numericMask = arguments?.getString(MASK_NUMERIC)
 
         idMask?.let {
-            mask = viewModel.getMaskById(it)
-            name_mask.setText(mask.title)
+//            mask = viewModel.getMaskById(it)
+            name_mask.setText(titleMask)
+            phone_mask.setText(numericMask)
         }
+
 
         return inflater.inflate(R.layout.fragment_new_mask, container, false)
     }
