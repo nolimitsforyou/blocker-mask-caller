@@ -19,11 +19,11 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
     }
 
     fun getMaskById(idMask: Int): Mask {
-        lateinit var m: Mask
+        lateinit var mask: Mask
         viewModelScope.launch {
-            m = repository.getMaskById(idMask)
+            mask = repository.getMaskById(idMask)
         }
-        return m
+        return mask
     }
 
     override fun onCleared() {

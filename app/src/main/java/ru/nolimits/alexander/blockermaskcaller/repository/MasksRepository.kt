@@ -28,9 +28,11 @@ class MasksRepository(private val database: PhoneMasksDataBase) {
         }
     }
 
-    suspend fun getMaskById(idMask: Int) : Mask {
-        return withContext(Dispatchers.IO) {
-            database.masksDao.getMaskById(idMask)
+    suspend fun getMaskById(idMask: Int): Mask {
+        var mask: Mask
+        withContext(Dispatchers.IO) {
+            mask = database.masksDao.getMaskById(idMask)
         }
+        return mask
     }
 }
