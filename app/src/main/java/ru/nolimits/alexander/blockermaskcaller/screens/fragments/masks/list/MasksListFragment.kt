@@ -76,7 +76,6 @@ class MasksListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
-                //TODO тут открыть редактирование маски
                 communicator.sendData(item)
             }
         })

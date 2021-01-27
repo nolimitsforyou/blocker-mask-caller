@@ -98,8 +98,8 @@ class ItemMaskFragment : Fragment() {
                 }
 
             } else {
-                //TODO сделать если не заполнено поле
-                AlertDialog.BUTTON_POSITIVE
+                //TODO показывать предупреждение, о том что обязательно должен быть введён номер
+                phone_mask.error = "необходимо ввести префикс номера"
             }
         }
 
