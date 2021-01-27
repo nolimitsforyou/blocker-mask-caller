@@ -22,6 +22,18 @@ class MasksRepository(private val database: PhoneMasksDataBase) {
         }
     }
 
+    suspend fun update(mask: Mask) {
+        withContext(Dispatchers.IO) {
+            database.masksDao.updateMask(mask)
+        }
+    }
+
+    suspend fun delete(id: Int) {
+        withContext(Dispatchers.IO) {
+            database.masksDao.deleteMask(id)
+        }
+    }
+
     suspend fun deleteAll() {
         withContext(Dispatchers.IO) {
             database.masksDao.deleteAll()

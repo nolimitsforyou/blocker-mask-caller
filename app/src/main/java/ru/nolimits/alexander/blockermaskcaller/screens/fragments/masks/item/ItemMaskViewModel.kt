@@ -18,7 +18,18 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
         }
     }
 
-    //TODO разобарться как возвращать объект
+    fun update(mask: Mask) {
+        viewModelScope.launch {
+            repository.update(mask)
+        }
+    }
+
+    fun delete(id: Int) {
+        viewModelScope.launch {
+            repository.delete(id)
+        }
+    }
+
     suspend fun getMaskById(idMask: Int): Mask {
         return repository.getMaskById(idMask)
     }

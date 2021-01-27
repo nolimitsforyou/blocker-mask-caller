@@ -22,8 +22,6 @@ class ItemMaskFragment : Fragment() {
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
-    private lateinit var mask: Mask
-
     private var idMask: Int? = null
 
     companion object {
@@ -62,12 +60,11 @@ class ItemMaskFragment : Fragment() {
 
         idMask?.let {
             lifecycleScope.launch {
-                mask = viewModel.getMaskById(it)
+                val mask = viewModel.getMaskById(it)
                 name_mask.setText(mask.title)
                 phone_mask.setText(mask.numeric)
             }
         }
-
 
         return inflater.inflate(R.layout.fragment_new_mask, container, false)
     }
@@ -79,9 +76,22 @@ class ItemMaskFragment : Fragment() {
 
             if (!TextUtils.isEmpty(phone_mask.text)) {
 
-                mask =
-                    Mask(numeric = phone_mask.text.toString(), title = name_mask.text.toString())
-                viewModel.insert(mask)
+                if (idMask != null) {
+                    viewModel.update(
+                        Mask(
+                            id = idMask!!,
+                            numeric = phone_mask.text.toString(),
+                            title = name_mask.text.toString()
+                        )
+                    )
+                } else {
+                    viewModel.insert(
+                        Mask(
+                            numeric = phone_mask.text.toString(),
+                            title = name_mask.text.toString()
+                        )
+                    )
+                }
 
                 fm.commit {
                     replace(R.id.fragment_container_view, MasksListFragment.newInstance())
@@ -90,6 +100,16 @@ class ItemMaskFragment : Fragment() {
             } else {
                 //TODO сделать если не заполнено поле
                 AlertDialog.BUTTON_POSITIVE
+            }
+        }
+
+        button_delete.setOnClickListener {
+            if (idMask != null) {
+                viewModel.delete(idMask!!)
+            } else {
+                fm.commit {
+                    replace(R.id.fragment_container_view, MasksListFragment.newInstance())
+                }
             }
         }
     }

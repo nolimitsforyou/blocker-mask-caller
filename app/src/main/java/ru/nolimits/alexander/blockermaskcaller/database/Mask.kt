@@ -16,8 +16,8 @@ interface MaskDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertMask(mask: Mask)
 
-    @Delete
-    fun deleteMask(mask: Mask)
+    @Query("DELETE FROM masks_table WHERE id = :idMask")
+    fun deleteMask(idMask: Int)
 
     @Update
     fun updateMask(mask: Mask)
