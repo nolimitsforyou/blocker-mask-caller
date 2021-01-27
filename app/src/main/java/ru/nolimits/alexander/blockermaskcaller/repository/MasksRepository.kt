@@ -2,6 +2,7 @@ package ru.nolimits.alexander.blockermaskcaller.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.database.PhoneMasksDataBase
@@ -28,10 +29,8 @@ class MasksRepository(private val database: PhoneMasksDataBase) {
     }
 
     suspend fun getMaskById(idMask: Int): Mask {
-        var mask: Mask
-        withContext(Dispatchers.IO) {
-            mask = database.masksDao.getMaskById(idMask)
+        return withContext(Dispatchers.IO) {
+            database.masksDao.getMaskById(idMask).first()
         }
-        return mask
     }
 }

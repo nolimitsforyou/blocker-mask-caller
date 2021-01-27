@@ -3,6 +3,7 @@ package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
 import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 
@@ -18,12 +19,9 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
         }
     }
 
-    fun getMaskById(idMask: Int): Mask {
-        lateinit var mask: Mask
-        viewModelScope.launch {
-            mask = repository.getMaskById(idMask)
-        }
-        return mask
+    //TODO разобарться как возвращать объект
+    suspend fun getMaskById(idMask: Int): Mask {
+        return repository.getMaskById(idMask)
     }
 
     override fun onCleared() {

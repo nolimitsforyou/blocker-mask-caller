@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.fragment_new_mask.*
+import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
@@ -23,21 +25,15 @@ class ItemMaskFragment : Fragment() {
     private lateinit var mask: Mask
 
     private var idMask: Int? = null
-    private var titleMask: String? = null
-    private var numericMask: String? = null
 
     companion object {
 
         const val MASK_ID = "mask_id"
-        const val MASK_TITLE = "mask_title"
-        const val MASK_NUMERIC = "mask_numeric"
 
         fun newInstance(mask: Mask? = null): ItemMaskFragment {
             val bundle = Bundle()
             mask?.let {
                 bundle.putInt(MASK_ID, mask.id)
-                bundle.putString(MASK_TITLE, mask.title)
-                bundle.putString(MASK_NUMERIC, mask.numeric)
             }
             val fr = ItemMaskFragment()
             fr.arguments = bundle
@@ -63,13 +59,13 @@ class ItemMaskFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
 
         idMask = arguments?.getInt(MASK_ID)
-        titleMask = arguments?.getString(MASK_TITLE)
-        numericMask = arguments?.getString(MASK_NUMERIC)
 
         idMask?.let {
-//            mask = viewModel.getMaskById(it)
-            name_mask.setText(titleMask)
-            phone_mask.setText(numericMask)
+            lifecycleScope.launch {
+                mask = viewModel.getMaskById(it)
+                name_mask.setText(mask.title)
+                phone_mask.setText(mask.numeric)
+            }
         }
 
 
