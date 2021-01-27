@@ -3,7 +3,6 @@ package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
 import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 

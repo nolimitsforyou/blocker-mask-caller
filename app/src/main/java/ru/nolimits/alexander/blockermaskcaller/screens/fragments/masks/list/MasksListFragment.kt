@@ -77,15 +77,7 @@ class MasksListFragment : Fragment() {
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
                 //TODO тут открыть редактирование маски
-
                 communicator.sendData(item)
-
-//                val fr = ItemMaskFragment.newInstance()
-//
-//                fm.commit {
-//                    addToBackStack(null)
-//                    replace(R.id.fragment_container_view, fr)
-//                }
             }
         })
 

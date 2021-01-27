@@ -31,12 +31,12 @@ class ItemMaskFragment : Fragment() {
         const val MASK_ID = "mask_id"
 
         fun newInstance(mask: Mask? = null): ItemMaskFragment {
-            val bundle = Bundle()
-            mask?.let {
-                bundle.putInt(MASK_ID, mask.id)
-            }
             val fr = ItemMaskFragment()
-            fr.arguments = bundle
+            if (mask != null) {
+                val bundle = Bundle()
+                bundle.putInt(MASK_ID, mask.id)
+                fr.arguments = bundle
+            }
             return fr
         }
     }
