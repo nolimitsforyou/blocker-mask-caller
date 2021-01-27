@@ -106,10 +106,9 @@ class ItemMaskFragment : Fragment() {
         button_delete.setOnClickListener {
             if (idMask != null) {
                 viewModel.delete(idMask!!)
-            } else {
-                fm.commit {
-                    replace(R.id.fragment_container_view, MasksListFragment.newInstance())
-                }
+            }
+            fm.commit {
+                replace(R.id.fragment_container_view, MasksListFragment.newInstance())
             }
         }
     }
