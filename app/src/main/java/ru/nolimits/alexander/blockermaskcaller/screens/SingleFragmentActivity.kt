@@ -1,10 +1,10 @@
-package ru.nolimits.alexander.blockermaskcaller.ui
+package ru.nolimits.alexander.blockermaskcaller.screens
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import ru.nolimits.alexander.blocker_mask_caller.R
+import ru.nolimits.alexander.blockermaskcaller.R
 
 abstract class SingleFragmentActivity : AppCompatActivity() {
 
@@ -17,7 +17,6 @@ abstract class SingleFragmentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId)
-
         val fm = supportFragmentManager
         var fragment = fm.findFragmentById(R.id.fragment_container_view)
         // ensures fragments already created will not be created
