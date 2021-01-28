@@ -8,8 +8,8 @@ import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 
 class PhoneMasksApplication : Application() {
 
-    val applicationScope = CoroutineScope(SupervisorJob())
-    val dataBase by lazy { PhoneMasksDataBase.getDataBase(this, applicationScope) }
+    private val applicationScope = CoroutineScope(SupervisorJob())
+    private val dataBase by lazy { PhoneMasksDataBase.getDataBase(this, applicationScope) }
     val repository by lazy { MasksRepository(dataBase) }
 
 }

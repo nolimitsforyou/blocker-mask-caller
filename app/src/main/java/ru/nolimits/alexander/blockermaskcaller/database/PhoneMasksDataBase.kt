@@ -13,7 +13,7 @@ abstract class PhoneMasksDataBase : RoomDatabase() {
 
     abstract val masksDao: MaskDao
 
-    private class WordDatabaseCallback(
+    private class PhoneMasksDataBaseCallback(
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
@@ -42,7 +42,7 @@ abstract class PhoneMasksDataBase : RoomDatabase() {
                     PhoneMasksDataBase::class.java,
                     "phone_masks_database"
                 )
-                    .addCallback(WordDatabaseCallback(scope))
+                    .addCallback(PhoneMasksDataBaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 // return instance
