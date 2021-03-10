@@ -21,7 +21,6 @@ import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.Mask
 
 class ItemMaskFragment : Fragment() {
 
-
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
@@ -119,6 +118,29 @@ class ItemMaskFragment : Fragment() {
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            REQUEST_CODE_PERMISSIONS_READ_PHONE_STATE -> {
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    // Permission is granted. Continue the action or workflow
+                    // in your app.
+                } else {
+                    //TODO если пользователь отклонил разрешение - показать диалог
+                }
+                return
+            }
+            else -> {
+                // Ignore all other requests.
+            }
+        }
+    }
+
     private fun checkingPermissionPhone() {
         when {
             ContextCompat.checkSelfPermission(
@@ -128,7 +150,7 @@ class ItemMaskFragment : Fragment() {
                 // You can use the API that requires the permission.
             }
             shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE) -> {
-                // TODO сделать диалог обхясняющий зачем нужно разрешение
+                // TODO сделать диалог объясняющий зачем нужно разрешение
             }
             else -> {
                 // You can directly ask for the permission.
