@@ -19,7 +19,7 @@ class CallReceiver : BroadcastReceiver() {
                     .substring(0, 7)
                     .toInt()
 
-            //TODO обработка номера и запрос в БД за ним
+            //обработка входящего номера и запрос в БД по нему
             GlobalScope.launch {
                 if (BackgroundDbOperations.checkNumber(incomingNumber) != null) {
                     //TODO блокировать
@@ -29,7 +29,7 @@ class CallReceiver : BroadcastReceiver() {
                 }
             }
 
-            Log.d("CallReceiver", "get_call")
+            Log.d("CallReceiver", "call intercepted")
         }
     }
 }
