@@ -20,8 +20,13 @@ class CallReceiver : BroadcastReceiver() {
                     .toInt()
 
             //TODO обработка номера и запрос в БД за ним
-            val job = GlobalScope.launch {
-                BackgroundDbOperations.checkNumber(incomingNumber)
+            GlobalScope.launch {
+                if (BackgroundDbOperations.checkNumber(incomingNumber) != null) {
+                    //TODO блокировать
+                    println("номер найден")
+                } else {
+                    println("номер не найден")
+                }
             }
 
             Log.d("CallReceiver", "get_call")

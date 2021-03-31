@@ -32,5 +32,5 @@ interface MaskDao {
     fun getMaskById(idMask: Int): Flow<Mask>
 
     @Query("SELECT * FROM masks_table WHERE numeric = :number")
-    fun getMaskByNumeric(number: Int): Flow<Mask>
+    fun getMaskByNumeric(number: Int): Mask
 }

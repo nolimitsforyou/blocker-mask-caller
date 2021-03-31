@@ -6,8 +6,7 @@ object BackgroundDbOperations {
 
     private val app = PhoneMasksApplication()
 
-    //TODO возвращаемый тип Boolean?
-    suspend fun checkNumber(number: Int) {
-        val mask = app.repository.getMaskByNumber(number)
+    suspend fun checkNumber(number: Int): Mask {
+       return app.repository.getMaskByNumber(number)
     }
 }
