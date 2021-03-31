@@ -8,18 +8,22 @@ import android.util.Log
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.database.BackgroundDbOperations
-import kotlin.math.log
 
 class CallReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val phoneState = intent.getStringExtra(TelephonyManager.EXTRA_STATE)
         if (phoneState.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
-            val incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER)
+            val incomingNumber =
+                intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER)
+                    .substring(0, 7)
+                    .toInt()
+
             //TODO обработка номера и запрос в БД за ним
             val job = GlobalScope.launch {
-                BackgroundDbOperations.test(incomingNumber.substring(0, 7).toInt())
+                BackgroundDbOperations.checkNumber(incomingNumber)
             }
+
             Log.d("CallReceiver", "get_call")
         }
     }
