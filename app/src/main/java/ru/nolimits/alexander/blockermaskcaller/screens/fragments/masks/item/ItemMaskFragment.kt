@@ -1,12 +1,14 @@
 package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
 
-import android.app.AlertDialog
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +29,7 @@ class ItemMaskFragment : Fragment() {
     companion object {
 
         const val MASK_ID = "mask_id"
+        private const val REQUEST_CODE_PERMISSIONS_READ_PHONE_STATE = 1
 
         fun newInstance(mask: Mask? = null): ItemMaskFragment {
             val fr = ItemMaskFragment()
@@ -73,6 +76,8 @@ class ItemMaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         button_add.setOnClickListener {
+            //проверяем разрешение READ_PHONE_STATE
+            checkingPermissionPhone()
 
             if (!TextUtils.isEmpty(phone_mask.text)) {
 
@@ -109,6 +114,50 @@ class ItemMaskFragment : Fragment() {
             }
             fm.commit {
                 replace(R.id.fragment_container_view, MasksListFragment.newInstance())
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            REQUEST_CODE_PERMISSIONS_READ_PHONE_STATE -> {
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    // Permission is granted. Continue the action or workflow
+                    // in your app.
+                } else {
+                    //TODO если пользователь отклонил разрешение - показать диалог
+                }
+                return
+            }
+            else -> {
+                // Ignore all other requests.
+            }
+        }
+    }
+
+    private fun checkingPermissionPhone() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_PHONE_STATE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                // You can use the API that requires the permission.
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE) -> {
+                // TODO сделать диалог объясняющий зачем нужно разрешение
+            }
+            else -> {
+                // You can directly ask for the permission.
+                requestPermissions(
+                    arrayOf(Manifest.permission.READ_PHONE_STATE),
+                    REQUEST_CODE_PERMISSIONS_READ_PHONE_STATE
+                )
             }
         }
     }

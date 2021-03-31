@@ -45,4 +45,10 @@ class MasksRepository(private val database: PhoneMasksDataBase) {
             database.masksDao.getMaskById(idMask).first()
         }
     }
+
+    suspend fun getMaskByNumber(number: Int): Mask {
+        return withContext(Dispatchers.IO) {
+            database.masksDao.getMaskByNumeric(number)
+        }
+    }
 }
