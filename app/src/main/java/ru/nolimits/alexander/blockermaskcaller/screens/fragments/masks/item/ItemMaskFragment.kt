@@ -29,7 +29,7 @@ class ItemMaskFragment : Fragment() {
     companion object {
 
         const val MASK_ID = "mask_id"
-        private const val REQUEST_CODE_PERMISSIONS_READ_PHONE_STATE = 1
+        private const val REQUEST_CODE_PERMISSIONS_PHONE = 1
 
         fun newInstance(mask: Mask? = null): ItemMaskFragment {
             val fr = ItemMaskFragment()
@@ -123,7 +123,7 @@ class ItemMaskFragment : Fragment() {
         permissions: Array<String>, grantResults: IntArray
     ) {
         when (requestCode) {
-            REQUEST_CODE_PERMISSIONS_READ_PHONE_STATE -> {
+            REQUEST_CODE_PERMISSIONS_PHONE -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)
@@ -152,11 +152,20 @@ class ItemMaskFragment : Fragment() {
             shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE) -> {
                 // TODO сделать диалог объясняющий зачем нужно разрешение
             }
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.MODIFY_PHONE_STATE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                // You can use the API that requires the permission.
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.MODIFY_PHONE_STATE) -> {
+                // TODO сделать диалог объясняющий зачем нужно разрешение
+            }
             else -> {
                 // You can directly ask for the permission.
                 requestPermissions(
                     arrayOf(Manifest.permission.READ_PHONE_STATE),
-                    REQUEST_CODE_PERMISSIONS_READ_PHONE_STATE
+                    REQUEST_CODE_PERMISSIONS_PHONE
                 )
             }
         }

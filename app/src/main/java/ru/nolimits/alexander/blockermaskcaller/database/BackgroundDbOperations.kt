@@ -6,7 +6,7 @@ object BackgroundDbOperations {
 
     private val app = PhoneMasksApplication()
 
-    suspend fun checkNumber(number: Int): Mask {
+    suspend fun checkNumber(number: Int): Mask? {
        return app.repository.getMaskByNumber(number)
     }
 }

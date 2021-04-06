@@ -46,7 +46,7 @@ class MasksRepository(private val database: PhoneMasksDataBase) {
         }
     }
 
-    suspend fun getMaskByNumber(number: Int): Mask {
+    suspend fun getMaskByNumber(number: Int): Mask? {
         return withContext(Dispatchers.IO) {
             database.masksDao.getMaskByNumeric(number)
         }
