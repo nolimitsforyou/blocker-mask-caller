@@ -39,6 +39,6 @@ class PersonalCallScreeningService : CallScreeningService() {
     }
 
     private fun getPhoneNumber(callDetails: Call.Details): Int {
-        return callDetails.handle.toString().toInt()
+        return callDetails.handle.schemeSpecificPart.toInt()
     }
 }
