@@ -14,7 +14,7 @@ class PersonalCallScreeningService : CallScreeningService() {
         val phoneNumber: Int = getPhoneNumber(callDetails)
         var response = CallResponse.Builder()
         response = handlePhoneCall(response, phoneNumber)
-
+        respondToCall(callDetails, response.build())
     }
 
     private fun handlePhoneCall(
