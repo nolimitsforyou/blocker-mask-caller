@@ -15,7 +15,6 @@ class PersonalCallScreeningService : CallScreeningService() {
         var response = CallResponse.Builder()
 
         GlobalScope.launch {
-
             val job = launch {
                 response = handlePhoneCall(response, phoneNumber)
             }
@@ -48,6 +47,9 @@ class PersonalCallScreeningService : CallScreeningService() {
 
     private fun getPhoneNumber(callDetails: Call.Details): Int {
         //todo заюзать регекс
-        return callDetails.handle.schemeSpecificPart.toInt()
+        return Regex("""[^0-9]""")
+            .replace(callDetails.handle.schemeSpecificPart, "")
+            .trim()
+            .toInt()
     }
 }
