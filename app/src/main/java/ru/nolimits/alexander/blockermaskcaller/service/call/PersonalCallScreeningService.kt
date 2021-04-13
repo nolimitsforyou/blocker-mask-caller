@@ -14,9 +14,15 @@ class PersonalCallScreeningService : CallScreeningService() {
 
         var response = CallResponse.Builder()
 
-        response = handlePhoneCall(response, phoneNumber)
+        GlobalScope.launch {
 
-        respondToCall(callDetails, response.build())
+            val job = launch {
+                response = handlePhoneCall(response, phoneNumber)
+            }
+            job.join()
+            //после ожидания завершения корутины выполняем действие со звонком
+            respondToCall(callDetails, response.build())
+        }
     }
 
     private suspend fun handlePhoneCall(
