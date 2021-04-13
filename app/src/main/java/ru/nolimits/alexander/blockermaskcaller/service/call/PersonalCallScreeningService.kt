@@ -46,9 +46,9 @@ class PersonalCallScreeningService : CallScreeningService() {
     }
 
     private fun getPhoneNumber(callDetails: Call.Details): Int {
-        //todo заюзать регекс
         return Regex("""[^0-9]""")
             .replace(callDetails.handle.schemeSpecificPart, "")
+            .substring(0, 7)
             .trim()
             .toInt()
     }
