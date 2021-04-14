@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -66,6 +67,8 @@ class ItemMaskFragment : Fragment() {
                 val mask = viewModel.getMaskById(it)
                 name_mask.setText(mask.title)
                 phone_mask.setText(mask.numeric)
+                //TODO сделать предупреждение что нужно ввести 7 символов
+                phone_mask.addTextChangedListener()
             }
         }
 
@@ -90,6 +93,7 @@ class ItemMaskFragment : Fragment() {
                         )
                     )
                 } else {
+                    //TODO сделать проверку что кол-во цифр в номере = 7 и выводить предупреждение
                     viewModel.insert(
                         Mask(
                             numeric = phone_mask.text.toString(),

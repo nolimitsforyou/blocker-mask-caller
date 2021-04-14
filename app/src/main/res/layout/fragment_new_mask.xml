@@ -23,6 +23,7 @@
     <EditText
         android:id="@+id/phone_mask"
         android:hint="7 999 888"
+        android:maxLength="7"
         android:inputType = "number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
