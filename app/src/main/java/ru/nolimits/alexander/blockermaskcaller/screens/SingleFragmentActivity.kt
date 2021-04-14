@@ -1,12 +1,16 @@
 package ru.nolimits.alexander.blockermaskcaller.screens
 
+import android.app.role.RoleManager
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.nolimits.alexander.blockermaskcaller.R
 
+
 abstract class SingleFragmentActivity : AppCompatActivity() {
+
+    private val REQUEST_ID = 1
 
     private val layoutResId: Int
         @LayoutRes
@@ -27,5 +31,12 @@ abstract class SingleFragmentActivity : AppCompatActivity() {
                 .add(R.id.fragment_container_view, fragment)
                 .commit()
         }
+        requestRole()
+    }
+
+    private fun requestRole() {
+        val roleManager = getSystemService(ROLE_SERVICE) as RoleManager
+        val intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_CALL_SCREENING)
+        startActivityForResult(intent, REQUEST_ID)
     }
 }
