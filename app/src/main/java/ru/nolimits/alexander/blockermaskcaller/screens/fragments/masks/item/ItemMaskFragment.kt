@@ -3,7 +3,9 @@ package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -67,8 +69,22 @@ class ItemMaskFragment : Fragment() {
                 val mask = viewModel.getMaskById(it)
                 name_mask.setText(mask.title)
                 phone_mask.setText(mask.numeric)
-                //TODO сделать предупреждение что нужно ввести 7 символов
-                phone_mask.addTextChangedListener()
+                phone_mask.addTextChangedListener(object : TextWatcher {
+
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                    }
+
+                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                    }
+
+                    override fun afterTextChanged(chars: Editable?) {
+                        if (chars?.length!! < 7 || chars.isNullOrEmpty()) {
+                            phone_mask.error = "введите не менее 7 цифр номера"
+                        }
+                    }
+                })
             }
         }
 
@@ -79,7 +95,7 @@ class ItemMaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         button_add.setOnClickListener {
-            //проверяем разрешение READ_PHONE_STATE
+
             checkingPermissionPhone()
 
             if (!TextUtils.isEmpty(phone_mask.text)) {
@@ -92,23 +108,25 @@ class ItemMaskFragment : Fragment() {
                             title = name_mask.text.toString()
                         )
                     )
-                } else {
-                    //TODO сделать проверку что кол-во цифр в номере = 7 и выводить предупреждение
+                    fm.commit {
+                        replace(R.id.fragment_container_view, MasksListFragment.newInstance())
+                    }
+                } else if (phone_mask.text.length == 7) {
                     viewModel.insert(
                         Mask(
                             numeric = phone_mask.text.toString(),
                             title = name_mask.text.toString()
                         )
                     )
+                    fm.commit {
+                        replace(R.id.fragment_container_view, MasksListFragment.newInstance())
+                    }
+                } else {
+                    phone_mask.error = "введите не менее 7 цифр номера"
                 }
-
-                fm.commit {
-                    replace(R.id.fragment_container_view, MasksListFragment.newInstance())
-                }
-
             } else {
                 //TODO усовершенствовать предупреждение
-                phone_mask.error = "необходимо ввести префикс номера"
+                phone_mask.error = "введите не менее 7 цифр номера"
             }
         }
 
