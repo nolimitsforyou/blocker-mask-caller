@@ -100,7 +100,7 @@ class ItemMaskFragment : Fragment() {
 
             if (!TextUtils.isEmpty(phone_mask.text)) {
 
-                if (idMask != null) {
+                if (idMask != null && phone_mask.text.length == 7) {
                     viewModel.update(
                         Mask(
                             id = idMask!!,
