@@ -72,11 +72,21 @@ class ItemMaskFragment : Fragment() {
                 phone_mask.setText(mask.numeric)
                 phone_mask.addTextChangedListener(object : TextWatcher {
 
-                    override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {
+                    override fun beforeTextChanged(
+                        text: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
 
                     }
 
-                    override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+                    override fun onTextChanged(
+                        text: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
                     }
 
                     override fun afterTextChanged(chars: Editable?) {
@@ -100,31 +110,26 @@ class ItemMaskFragment : Fragment() {
 
             checkingPermissionPhone()
 
-            if (!TextUtils.isEmpty(phone_mask.text)) {
-
-                if (idMask != null && phone_mask.text.length == 7) {
-                    viewModel.update(
-                        Mask(
-                            id = idMask!!,
-                            numeric = phone_mask.text.toString(),
-                            title = name_mask.text.toString()
-                        )
+            if (idMask != null && phone_mask.text.length == 7) {
+                viewModel.update(
+                    Mask(
+                        id = idMask!!,
+                        numeric = phone_mask.text.toString(),
+                        title = name_mask.text.toString()
                     )
-                    fm.commit {
-                        replace(R.id.fragment_container_view, MasksListFragment.newInstance())
-                    }
-                } else if (phone_mask.text.length == 7) {
-                    viewModel.insert(
-                        Mask(
-                            numeric = phone_mask.text.toString(),
-                            title = name_mask.text.toString()
-                        )
+                )
+                fm.commit {
+                    replace(R.id.fragment_container_view, MasksListFragment.newInstance())
+                }
+            } else if (phone_mask.text.length == 7) {
+                viewModel.insert(
+                    Mask(
+                        numeric = phone_mask.text.toString(),
+                        title = name_mask.text.toString()
                     )
-                    fm.commit {
-                        replace(R.id.fragment_container_view, MasksListFragment.newInstance())
-                    }
-                } else {
-                    phone_mask.error = phoneNumberAlertText
+                )
+                fm.commit {
+                    replace(R.id.fragment_container_view, MasksListFragment.newInstance())
                 }
             } else {
                 phone_mask.error = phoneNumberAlertText
