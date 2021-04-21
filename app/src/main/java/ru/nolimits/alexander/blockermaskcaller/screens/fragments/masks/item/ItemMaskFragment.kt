@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -24,7 +23,7 @@ import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.Mask
 
 class ItemMaskFragment : Fragment() {
 
-    private val phoneNumberAlertText = getString(R.string.alert_phone_number)
+    private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
@@ -48,6 +47,7 @@ class ItemMaskFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         fm = activity?.supportFragmentManager!!
+        phoneNumberAlertText = getString(R.string.alert_phone_number)
         super.onCreate(savedInstanceState)
     }
 
@@ -72,17 +72,18 @@ class ItemMaskFragment : Fragment() {
                 phone_mask.setText(mask.numeric)
                 phone_mask.addTextChangedListener(object : TextWatcher {
 
-                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {
 
                     }
 
-                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                    override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
                     }
 
                     override fun afterTextChanged(chars: Editable?) {
                         if (chars?.length!! < 7 || chars.isNullOrEmpty()) {
                             phone_mask.error = phoneNumberAlertText
+                        } else {
+                            //TODO заменять первую цифру на 7 ?
                         }
                     }
                 })
