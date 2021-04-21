@@ -3,7 +3,9 @@ package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.Mask
 
 class ItemMaskFragment : Fragment() {
 
+    private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
@@ -44,6 +47,7 @@ class ItemMaskFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         fm = activity?.supportFragmentManager!!
+        phoneNumberAlertText = getString(R.string.alert_phone_number)
         super.onCreate(savedInstanceState)
     }
 
@@ -66,6 +70,33 @@ class ItemMaskFragment : Fragment() {
                 val mask = viewModel.getMaskById(it)
                 name_mask.setText(mask.title)
                 phone_mask.setText(mask.numeric)
+                phone_mask.addTextChangedListener(object : TextWatcher {
+
+                    override fun beforeTextChanged(
+                        text: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+
+                    }
+
+                    override fun onTextChanged(
+                        text: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+
+                    override fun afterTextChanged(chars: Editable?) {
+                        if (chars?.length!! < 7 || chars.isNullOrEmpty()) {
+                            phone_mask.error = phoneNumberAlertText
+                        } else {
+                            //TODO заменять первую цифру на 7 ?
+                        }
+                    }
+                })
             }
         }
 
@@ -76,35 +107,32 @@ class ItemMaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         button_add.setOnClickListener {
-            //проверяем разрешение READ_PHONE_STATE
+
             checkingPermissionPhone()
 
-            if (!TextUtils.isEmpty(phone_mask.text)) {
-
-                if (idMask != null) {
-                    viewModel.update(
-                        Mask(
-                            id = idMask!!,
-                            numeric = phone_mask.text.toString(),
-                            title = name_mask.text.toString()
-                        )
+            if (idMask != null && phone_mask.text.length == 7) {
+                viewModel.update(
+                    Mask(
+                        id = idMask!!,
+                        numeric = phone_mask.text.toString(),
+                        title = name_mask.text.toString()
                     )
-                } else {
-                    viewModel.insert(
-                        Mask(
-                            numeric = phone_mask.text.toString(),
-                            title = name_mask.text.toString()
-                        )
-                    )
-                }
-
+                )
                 fm.commit {
                     replace(R.id.fragment_container_view, MasksListFragment.newInstance())
                 }
-
+            } else if (phone_mask.text.length == 7) {
+                viewModel.insert(
+                    Mask(
+                        numeric = phone_mask.text.toString(),
+                        title = name_mask.text.toString()
+                    )
+                )
+                fm.commit {
+                    replace(R.id.fragment_container_view, MasksListFragment.newInstance())
+                }
             } else {
-                //TODO усовершенствовать предупреждение
-                phone_mask.error = "необходимо ввести префикс номера"
+                phone_mask.error = phoneNumberAlertText
             }
         }
 

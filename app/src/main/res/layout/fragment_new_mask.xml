@@ -8,7 +8,7 @@
 
     <EditText
         android:id="@+id/name_mask"
-        android:hint="Имя"
+        android:hint="@string/name_mask"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -22,7 +22,8 @@
 
     <EditText
         android:id="@+id/phone_mask"
-        android:hint="7 999 888"
+        android:hint="@string/phone_number_placeholder"
+        android:maxLength="7"
         android:inputType = "number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="сохранить"
+        android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_mask" />
@@ -54,7 +55,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
-        android:text="удалить"
+        android:text="@string/button_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_mask" />

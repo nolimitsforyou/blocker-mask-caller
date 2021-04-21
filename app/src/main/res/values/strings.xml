@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Blocker Mask Caller</string>
+    <string name="name_mask">Имя</string>
+    <string name="alert_phone_number">"введите не менее 7 цифр номера"</string>
+    <string name="phone_number_placeholder">7 999 888</string>
+    <string name="button_save">сохранить</string>
+    <string name="button_delete">удалить</string>>
 </resources>
