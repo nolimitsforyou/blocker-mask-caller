@@ -24,6 +24,7 @@ import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.Mask
 
 class ItemMaskFragment : Fragment() {
 
+    private val phoneNumberAlertText = getString(R.string.alert_phone_number)
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var fm: FragmentManager
@@ -81,7 +82,7 @@ class ItemMaskFragment : Fragment() {
 
                     override fun afterTextChanged(chars: Editable?) {
                         if (chars?.length!! < 7 || chars.isNullOrEmpty()) {
-                            phone_mask.error = "введите не менее 7 цифр номера"
+                            phone_mask.error = phoneNumberAlertText
                         }
                     }
                 })
@@ -122,11 +123,10 @@ class ItemMaskFragment : Fragment() {
                         replace(R.id.fragment_container_view, MasksListFragment.newInstance())
                     }
                 } else {
-                    phone_mask.error = "введите не менее 7 цифр номера"
+                    phone_mask.error = phoneNumberAlertText
                 }
             } else {
-                //TODO усовершенствовать предупреждение
-                phone_mask.error = "введите не менее 7 цифр номера"
+                phone_mask.error = phoneNumberAlertText
             }
         }
 
