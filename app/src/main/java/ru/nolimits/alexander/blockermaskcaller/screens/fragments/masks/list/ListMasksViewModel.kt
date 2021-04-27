@@ -25,6 +25,12 @@ class ListMasksViewModel(private val repository: MasksRepository) : ViewModel() 
         }
     }
 
+    fun delete(id: Int) {
+        viewModelScope.launch {
+            repository.delete(id)
+        }
+    }
+
 }
 
 class ListMasksViewModelFactory(private val repository: MasksRepository) : ViewModelProvider.Factory {
