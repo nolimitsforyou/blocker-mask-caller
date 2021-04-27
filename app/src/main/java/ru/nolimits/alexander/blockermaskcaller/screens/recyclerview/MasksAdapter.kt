@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 
 
 class MasksAdapter(
-    var masks: List<Mask> = listOf(),
+    var masksList: List<Mask> = listOf(),
     val callback: Callback
 ) : RecyclerView.Adapter<MasksAdapter.MaskHolder>() {
 
@@ -21,13 +22,13 @@ class MasksAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: MaskHolder, position: Int) {
-        viewHolder.bind(masks[position])
+        viewHolder.bind(masksList[position])
     }
 
-    override fun getItemCount(): Int = masks.size
+    override fun getItemCount(): Int = masksList.size
 
     fun refreshPhoneMasks(masks: List<Mask>) {
-        this.masks = masks
+        this.masksList = masks
         notifyDataSetChanged()
     }
 
@@ -40,7 +41,7 @@ class MasksAdapter(
             maskNumberTextView.text = item.numeric
             itemView.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    callback.onItemClicked(masks[adapterPosition])
+                    callback.onItemClicked(masksList[adapterPosition])
                 }
             }
         }

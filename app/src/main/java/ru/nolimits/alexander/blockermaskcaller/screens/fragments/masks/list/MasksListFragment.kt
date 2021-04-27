@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_list_masks.*
 import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
@@ -90,5 +92,29 @@ class MasksListFragment : Fragment() {
                 adapterMasks.refreshPhoneMasks(it)
             }
         })
+        setRecyclerViewItemTouchListener()
+    }
+
+    private fun setRecyclerViewItemTouchListener() {
+
+        val itemTouchCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                viewHolder1: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
+                val position = viewHolder.adapterPosition
+                val maskId = viewModel.allMasks.value?.get(position)?.id
+                viewModel.delete(maskId!!)
+                masks_recyclerview.adapter!!.notifyItemRemoved(position)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
+        itemTouchHelper.attachToRecyclerView(masks_recyclerview)
     }
 }
