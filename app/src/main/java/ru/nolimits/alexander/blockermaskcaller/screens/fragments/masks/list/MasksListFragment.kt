@@ -1,9 +1,16 @@
 package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list
 
+import android.app.AlertDialog
+import android.app.role.RoleManager
+import android.app.role.RoleManager.ROLE_CALL_SCREENING
+import android.content.Context.ROLE_SERVICE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -93,6 +100,7 @@ class MasksListFragment : Fragment() {
             }
         })
         setRecyclerViewItemTouchListener()
+        checkPermission()
     }
 
     private fun setRecyclerViewItemTouchListener() {
@@ -116,5 +124,30 @@ class MasksListFragment : Fragment() {
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
         itemTouchHelper.attachToRecyclerView(masks_recyclerview)
+    }
+
+    private fun checkPermission() {
+
+        // Проверяем есть ли роль у нашего приложения, если нет - предупреждаем
+        val roleManager: RoleManager = context?.getSystemService(ROLE_SERVICE) as RoleManager
+
+        if (!roleManager.isRoleHeld(ROLE_CALL_SCREENING)) {
+            val alertDialog = AlertDialog.Builder(requireContext())
+            alertDialog
+                .setTitle(R.string.alert_dialog_title)
+                .setMessage(R.string.alert_dialog_message)
+                .setPositiveButton(
+                    R.string.button_ok
+                ) { _, _ ->
+                    startActivityForResult(
+                        Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS),
+                        0
+                    )
+                }
+                .setNegativeButton(R.string.button_close) { dialog, _ ->
+                    dialog.cancel()
+                }
+            alertDialog.show()
+        }
     }
 }

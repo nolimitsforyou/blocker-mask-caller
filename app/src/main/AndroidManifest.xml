@@ -9,8 +9,6 @@
         android:name="android.hardware.microphone"
         android:required="true" />
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-
     <application
         android:name=".PhoneMasksApplication"
         android:allowBackup="true"
@@ -30,7 +28,7 @@
             android:name=".service.call.PersonalCallScreeningService"
             android:permission="android.permission.BIND_SCREENING_SERVICE">
             <intent-filter>
-                <action android:name="android.telecom.CallScreeningService"/>
+                <action android:name="android.telecom.CallScreeningService" />
             </intent-filter>
         </service>
     </application>

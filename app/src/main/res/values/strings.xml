@@ -3,6 +3,13 @@
     <string name="name_mask">Имя</string>
     <string name="alert_phone_number">"введите не менее 7 цифр номера"</string>
     <string name="phone_number_placeholder">7 999 888</string>
+    <string name="button_ok">ok</string>
     <string name="button_save">сохранить</string>
-    <string name="button_delete">удалить</string>>
+    <string name="button_delete">удалить</string>
+    <string name="button_close">закрыть</string>
+    <string name="alert_dialog_title">Необходима настройка</string>
+    <string name="alert_dialog_message">
+        Для работы Blocker Mask Caller необходимо выбрать его приложением по умолчанию в разделе
+        АОН и защита от спама. Если вы не выполните настройку работа приложения будет невозможна
+    </string>
 </resources>
