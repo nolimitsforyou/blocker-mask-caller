@@ -1,13 +1,13 @@
 package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list
 
 import android.app.AlertDialog
+import android.app.role.RoleManager
 import android.app.role.RoleManager.ROLE_CALL_SCREENING
+import android.content.Context.ROLE_SERVICE
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
@@ -100,7 +100,7 @@ class MasksListFragment : Fragment() {
             }
         })
         setRecyclerViewItemTouchListener()
-//        checkPermission()
+        checkPermission()
     }
 
     private fun setRecyclerViewItemTouchListener() {
@@ -128,10 +128,10 @@ class MasksListFragment : Fragment() {
 
     private fun checkPermission() {
 
-        //TODO проверять ROLE_CALL_SCREENING
-        if (ContextCompat.checkSelfPermission(requireContext(), ROLE_CALL_SCREENING)
-            == PackageManager.PERMISSION_DENIED
-        ) {
+        // Проверяем есть ли роль у нашего приложения, если нет - предупреждаем
+        val roleManager: RoleManager = context?.getSystemService(ROLE_SERVICE) as RoleManager
+
+        if (!roleManager.isRoleHeld(ROLE_CALL_SCREENING)) {
             val alertDialog = AlertDialog.Builder(requireContext())
             alertDialog
                 .setTitle(R.string.alert_dialog_title)

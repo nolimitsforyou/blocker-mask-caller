@@ -37,7 +37,9 @@ abstract class SingleFragmentActivity : AppCompatActivity() {
 
     private fun requestRole() {
         val roleManager = getSystemService(ROLE_SERVICE) as RoleManager
-        val intent = roleManager.createRequestRoleIntent(ROLE_CALL_SCREENING)
-        startActivityForResult(intent, REQUEST_ID)
+        if (roleManager.isRoleAvailable(ROLE_CALL_SCREENING)) {
+            val intent = roleManager.createRequestRoleIntent(ROLE_CALL_SCREENING)
+            startActivityForResult(intent, REQUEST_ID)
+        }
     }
 }
