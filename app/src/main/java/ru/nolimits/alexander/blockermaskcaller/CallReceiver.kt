@@ -13,7 +13,7 @@ class CallReceiver : BroadcastReceiver() {
         if (state.equals(TelephonyManager.CALL_STATE_RINGING)) {
             val serviceIntent = Intent(context, PersonalCallScreeningService::class.java)
             context.startService(serviceIntent)
-            //TODO надо ещё проверять разрешения на READ_PHONE_STATE
+            //TODO настроить запуск сервиса
         }
     }
 }
