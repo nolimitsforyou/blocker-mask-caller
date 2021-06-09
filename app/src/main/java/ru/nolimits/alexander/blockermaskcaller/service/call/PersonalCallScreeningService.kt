@@ -36,9 +36,9 @@ class PersonalCallScreeningService : CallScreeningService() {
                     setDisallowCall(true)
                     setSkipCallLog(false)
                 }
-                Log.d("CallReceiver", "number found")
+                Log.d("PersonalCallScreeningService", "number found")
             } else {
-                Log.d("CallReceiver", "number not found")
+                Log.d("PersonalCallScreeningService", "number not found")
             }
         }
         job.join()
