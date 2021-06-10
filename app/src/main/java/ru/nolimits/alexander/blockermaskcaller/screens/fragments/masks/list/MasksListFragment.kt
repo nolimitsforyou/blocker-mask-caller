@@ -1,13 +1,13 @@
 package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list
 
-import android.app.AlertDialog
-import android.app.role.RoleManager
-import android.app.role.RoleManager.ROLE_CALL_SCREENING
-import android.content.Context.ROLE_SERVICE
-import android.content.Intent
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
@@ -25,10 +25,11 @@ import ru.nolimits.alexander.blockermaskcaller.shared.Communicator
 
 class MasksListFragment : Fragment() {
 
+    private val readPhoneStatePermission = Manifest.permission.READ_PHONE_STATE
+    private val requestCodeReadPhoneState = 1
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var viewModelFactory: ListMasksViewModelFactory
     private lateinit var fm: FragmentManager
-
     private lateinit var communicator: Communicator
 
 
@@ -128,26 +129,61 @@ class MasksListFragment : Fragment() {
 
     private fun checkPermission() {
 
-        // Проверяем есть ли роль у нашего приложения, если нет - предупреждаем
-        val roleManager: RoleManager = context?.getSystemService(ROLE_SERVICE) as RoleManager
-
-        if (!roleManager.isRoleHeld(ROLE_CALL_SCREENING)) {
-            val alertDialog = AlertDialog.Builder(requireContext())
-            alertDialog
-                .setTitle(R.string.alert_dialog_title)
-                .setMessage(R.string.alert_dialog_message)
-                .setPositiveButton(
-                    R.string.button_ok
-                ) { _, _ ->
-                    startActivityForResult(
-                        Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS),
-                        0
-                    )
-                }
-                .setNegativeButton(R.string.button_close) { dialog, _ ->
-                    dialog.cancel()
-                }
-            alertDialog.show()
+        when {
+            checkSelfPermission(
+                activity?.applicationContext!!,
+                readPhoneStatePermission
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                //ничего не делаем
+            }
+            shouldShowRequestPermissionRationale(readPhoneStatePermission) -> {
+                //показываем разъясняющий диалог
+                showCustomAlertDialog()
+            }
+            else -> {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(readPhoneStatePermission),
+                    requestCodeReadPhoneState
+                )
+            }
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            requestCodeReadPhoneState -> {
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    // Permission is granted. Continue the action or workflow
+                    // in your app.
+                } else {
+                    showCustomAlertDialog()
+                }
+                return
+            }
+            else -> {
+                // Ignore all other requests.
+            }
+        }
+    }
+
+    private fun showCustomAlertDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog
+            .setTitle(R.string.alert_dialog_title)
+            .setMessage(R.string.alert_dialog_message)
+            .setPositiveButton(
+                R.string.button_ok
+            ) { dialog, _ ->
+                dialog.cancel()
+            }
+        alertDialog.show()
     }
 }

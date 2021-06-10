@@ -6,6 +6,7 @@ import kotlinx.coroutines.SupervisorJob
 import ru.nolimits.alexander.blockermaskcaller.database.PhoneMasksDataBase
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 
+
 class PhoneMasksApplication : Application() {
 
     private val applicationScope = CoroutineScope(SupervisorJob())

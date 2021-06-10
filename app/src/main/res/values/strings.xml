@@ -9,7 +9,6 @@
     <string name="button_close">закрыть</string>
     <string name="alert_dialog_title">Необходима настройка</string>
     <string name="alert_dialog_message">
-        Для работы Blocker Mask Caller необходимо выбрать его приложением по умолчанию в разделе
-        АОН и защита от спама. Если вы не выполните настройку работа приложения будет невозможна
+        Для корректной работы Blocker Mask Caller необходимо предоставить ему разрешение на доступ к телефону
     </string>
 </resources>
