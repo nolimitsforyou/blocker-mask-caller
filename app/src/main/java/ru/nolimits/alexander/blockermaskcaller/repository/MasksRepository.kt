@@ -6,13 +6,16 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.database.PhoneMasksDataBase
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Repository  используется в случае если есть несколько источников данных (Network, Local)
  * в нашем случае данные хранятся только в БД
  */
 
-class MasksRepository(private val database: PhoneMasksDataBase) {
+@Singleton
+class MasksRepository @Inject constructor(private val database: PhoneMasksDataBase) {
 
     val allMasks: Flow<List<Mask>> = database.masksDao.getAllMasks()
 

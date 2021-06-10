@@ -2,11 +2,16 @@ package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
 
 import android.util.Log
 import androidx.lifecycle.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
+import javax.inject.Inject
 
-class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
+@AndroidEntryPoint
+class ItemMaskViewModel : ViewModel() {
+
+    @Inject lateinit var repository: MasksRepository
 
     init {
         Log.i("NewMaskViewModel", "NewMaskViewModel created!")
@@ -40,12 +45,13 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
     }
 }
 
-class ItemMaskViewModelFactory(private val repository: MasksRepository) :
-    ViewModelProvider.Factory {
+class ItemMaskViewModelFactory : ViewModelProvider.Factory {
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
+
         if (modelClass.isAssignableFrom(ItemMaskViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ItemMaskViewModel(repository) as T
+            return ItemMaskViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

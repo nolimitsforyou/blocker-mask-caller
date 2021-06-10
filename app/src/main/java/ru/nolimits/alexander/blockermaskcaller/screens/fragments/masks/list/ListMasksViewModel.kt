@@ -2,10 +2,12 @@ package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list
 
 import android.util.Log
 import androidx.lifecycle.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 
+@AndroidEntryPoint
 class ListMasksViewModel(private val repository: MasksRepository) : ViewModel() {
 
     val allMasks: LiveData<List<Mask>> = repository.allMasks.asLiveData()

@@ -55,8 +55,7 @@ class ItemMaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModelFactory =
-            ItemMaskViewModelFactory((activity?.applicationContext as PhoneMasksApplication).repository)
+        viewModelFactory = ItemMaskViewModelFactory()
 
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
