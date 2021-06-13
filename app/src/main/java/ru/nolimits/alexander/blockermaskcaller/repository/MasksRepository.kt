@@ -5,53 +5,49 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import ru.nolimits.alexander.blockermaskcaller.database.Mask
-import ru.nolimits.alexander.blockermaskcaller.database.PhoneMasksDataBase
+import ru.nolimits.alexander.blockermaskcaller.database.MaskDao
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * Repository  используется в случае если есть несколько источников данных (Network, Local)
- * в нашем случае данные хранятся только в БД
- */
 
 @Singleton
-class MasksRepository @Inject constructor(private val database: PhoneMasksDataBase) {
+class MasksRepository @Inject constructor(private val masksDao: MaskDao) {
 
-    val allMasks: Flow<List<Mask>> = database.masksDao.getAllMasks()
+    val allMasks: Flow<List<Mask>> = masksDao.getAllMasks()
 
     suspend fun insert(mask: Mask) {
         withContext(Dispatchers.IO) {
-            database.masksDao.insertMask(mask)
+            masksDao.insertMask(mask)
         }
     }
 
     suspend fun update(mask: Mask) {
         withContext(Dispatchers.IO) {
-            database.masksDao.updateMask(mask)
+            masksDao.updateMask(mask)
         }
     }
 
     suspend fun delete(id: Int) {
         withContext(Dispatchers.IO) {
-            database.masksDao.deleteMask(id)
+            masksDao.deleteMask(id)
         }
     }
 
     suspend fun deleteAll() {
         withContext(Dispatchers.IO) {
-            database.masksDao.deleteAll()
+            masksDao.deleteAll()
         }
     }
 
     suspend fun getMaskById(idMask: Int): Mask {
         return withContext(Dispatchers.IO) {
-            database.masksDao.getMaskById(idMask).first()
+            masksDao.getMaskById(idMask).first()
         }
     }
 
     suspend fun getMaskByNumber(number: Int): Mask? {
         return withContext(Dispatchers.IO) {
-            database.masksDao.getMaskByNumeric(number)
+            masksDao.getMaskByNumeric(number)
         }
     }
 }

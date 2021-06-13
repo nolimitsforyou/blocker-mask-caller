@@ -4,46 +4,27 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @Database(entities = arrayOf(Mask::class), version = 1)
 abstract class PhoneMasksDataBase : RoomDatabase() {
 
-    abstract val masksDao: MaskDao
-
-    private class PhoneMasksDataBaseCallback(
-        private val scope: CoroutineScope
-    ) : RoomDatabase.Callback() {
-
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
-            INSTANCE?.let {
-                scope.launch {
-                //тут можно получать данные из сети если это предусмотрено
-                }
-            }
-        }
-    }
+    abstract fun masksDao(): MaskDao
 
     companion object {
-
+        // Singleton prevents multiple instances of database opening at the
+        // same time.
         @Volatile
         private var INSTANCE: PhoneMasksDataBase? = null
 
-        fun getDataBase(
-            context: Context,
-            scope: CoroutineScope
-        ): PhoneMasksDataBase {
+        fun getDataBase(context: Context): PhoneMasksDataBase {
+            // if the INSTANCE is not null, then return it,
+            // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PhoneMasksDataBase::class.java,
                     "phone_masks_database"
-                )
-                    .addCallback(PhoneMasksDataBaseCallback(scope))
-                    .build()
+                ).build()
                 INSTANCE = instance
                 // return instance
                 instance

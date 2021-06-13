@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ru.nolimits.alexander.blockermaskcaller.database.MaskDao
 import ru.nolimits.alexander.blockermaskcaller.database.PhoneMasksDataBase
 import javax.inject.Singleton
 
@@ -22,5 +23,10 @@ object DatabaseModule {
             PhoneMasksDataBase::class.java,
             "logging.db"
         ).build()
+    }
+
+    @Provides
+    fun provideMaskDao(database: PhoneMasksDataBase): MaskDao {
+        return database.masksDao()
     }
 }

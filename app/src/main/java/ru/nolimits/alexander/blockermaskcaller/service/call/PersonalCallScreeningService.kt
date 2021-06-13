@@ -4,11 +4,15 @@ import android.telecom.Call
 import android.telecom.CallScreeningService
 import android.util.Log
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
-import ru.nolimits.alexander.blockermaskcaller.database.BackgroundDbOperations.checkNumber
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PersonalCallScreeningService : CallScreeningService() {
+
+    @Inject lateinit var repository: MasksRepository
 
     override fun onScreenCall(callDetails: Call.Details) {
 
@@ -32,7 +36,7 @@ class PersonalCallScreeningService : CallScreeningService() {
     ): CallResponse.Builder {
 
         val job = GlobalScope.launch {
-            if (checkNumber(phoneNumber) != null) {
+            if (repository.getMaskByNumber(phoneNumber) != null) {
                 response.apply {
                     setRejectCall(true)
                     setDisallowCall(true)
