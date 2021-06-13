@@ -28,8 +28,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MasksListFragment : Fragment() {
 
-    @Inject
-    lateinit var repository: MasksRepository
+    @Inject lateinit var repository: MasksRepository
     private val readPhoneStatePermission = Manifest.permission.READ_PHONE_STATE
     private val requestCodeReadPhoneState = 1
     private lateinit var viewModel: ListMasksViewModel

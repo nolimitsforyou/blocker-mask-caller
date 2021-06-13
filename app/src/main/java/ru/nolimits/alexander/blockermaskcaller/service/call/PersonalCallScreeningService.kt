@@ -3,9 +3,11 @@ package ru.nolimits.alexander.blockermaskcaller.service.call
 import android.telecom.Call
 import android.telecom.CallScreeningService
 import android.util.Log
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import ru.nolimits.alexander.blockermaskcaller.database.BackgroundDbOperations.checkNumber
 
+@AndroidEntryPoint
 class PersonalCallScreeningService : CallScreeningService() {
 
     override fun onScreenCall(callDetails: Call.Details) {
