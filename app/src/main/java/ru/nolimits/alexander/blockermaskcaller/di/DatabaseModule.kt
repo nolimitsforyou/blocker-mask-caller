@@ -18,11 +18,7 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext appContext: Context): PhoneMasksDataBase {
-        return Room.databaseBuilder(
-            appContext,
-            PhoneMasksDataBase::class.java,
-            "logging.db"
-        ).build()
+       return PhoneMasksDataBase.getDataBase(appContext)
     }
 
     @Provides

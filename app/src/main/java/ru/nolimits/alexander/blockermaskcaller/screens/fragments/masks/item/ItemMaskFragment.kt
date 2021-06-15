@@ -34,7 +34,6 @@ class ItemMaskFragment : Fragment() {
     companion object {
 
         const val MASK_ID = "mask_id"
-        private const val REQUEST_CODE_PERMISSIONS_PHONE = 1
 
         fun newInstance(mask: Mask? = null): ItemMaskFragment {
             val fr = ItemMaskFragment()
