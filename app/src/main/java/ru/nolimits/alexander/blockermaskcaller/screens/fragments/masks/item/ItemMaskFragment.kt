@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_new_mask.*
 import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.R
-import ru.nolimits.alexander.blockermaskcaller.database.Mask
+import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment
 import javax.inject.Inject

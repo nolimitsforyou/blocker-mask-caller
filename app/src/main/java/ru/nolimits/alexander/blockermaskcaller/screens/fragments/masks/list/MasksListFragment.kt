@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_list_masks.*
 import ru.nolimits.alexander.blockermaskcaller.R
-import ru.nolimits.alexander.blockermaskcaller.database.Mask
+import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
@@ -26,7 +26,7 @@ import ru.nolimits.alexander.blockermaskcaller.shared.Communicator
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MasksListFragment : Fragment() {
+class MasksListFragment @Inject constructor(): Fragment() {
 
     @Inject lateinit var repository: MasksRepository
     private val readPhoneStatePermission = Manifest.permission.READ_PHONE_STATE
