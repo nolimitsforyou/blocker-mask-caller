@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import ru.nolimits.alexander.blockermaskcaller.R
-import ru.nolimits.alexander.blockermaskcaller.database.Mask
+import ru.nolimits.alexander.blockermaskcaller.data.Mask
 
 
 class MasksAdapter(

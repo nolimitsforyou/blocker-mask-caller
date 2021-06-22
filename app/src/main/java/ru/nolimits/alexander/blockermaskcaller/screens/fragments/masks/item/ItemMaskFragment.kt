@@ -12,15 +12,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_new_mask.*
 import kotlinx.coroutines.launch
-import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
-import ru.nolimits.alexander.blockermaskcaller.database.Mask
+import ru.nolimits.alexander.blockermaskcaller.data.Mask
+import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ItemMaskFragment : Fragment() {
 
+    @Inject lateinit var repository: MasksRepository
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
@@ -30,7 +34,6 @@ class ItemMaskFragment : Fragment() {
     companion object {
 
         const val MASK_ID = "mask_id"
-        private const val REQUEST_CODE_PERMISSIONS_PHONE = 1
 
         fun newInstance(mask: Mask? = null): ItemMaskFragment {
             val fr = ItemMaskFragment()
@@ -55,8 +58,7 @@ class ItemMaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModelFactory =
-            ItemMaskViewModelFactory((activity?.applicationContext as PhoneMasksApplication).repository)
+        viewModelFactory = ItemMaskViewModelFactory(repository)
 
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)

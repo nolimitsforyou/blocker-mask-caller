@@ -15,16 +15,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_list_masks.*
-import ru.nolimits.alexander.blockermaskcaller.PhoneMasksApplication
 import ru.nolimits.alexander.blockermaskcaller.R
-import ru.nolimits.alexander.blockermaskcaller.database.Mask
+import ru.nolimits.alexander.blockermaskcaller.data.Mask
+import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
 import ru.nolimits.alexander.blockermaskcaller.shared.Communicator
+import javax.inject.Inject
 
-class MasksListFragment : Fragment() {
+@AndroidEntryPoint
+class MasksListFragment @Inject constructor(): Fragment() {
 
+    @Inject lateinit var repository: MasksRepository
     private val readPhoneStatePermission = Manifest.permission.READ_PHONE_STATE
     private val requestCodeReadPhoneState = 1
     private lateinit var viewModel: ListMasksViewModel
@@ -74,7 +78,7 @@ class MasksListFragment : Fragment() {
         communicator = activity as Communicator
 
         viewModelFactory =
-            ListMasksViewModelFactory((activity?.applicationContext as PhoneMasksApplication).repository)
+            ListMasksViewModelFactory(repository)
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ListMasksViewModel::class.java)
