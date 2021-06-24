@@ -52,8 +52,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -71,4 +69,7 @@ dependencies {
     //Hilt
     implementation "com.google.dagger:hilt-android:2.35"
     kapt "com.google.dagger:hilt-android-compiler:2.35"
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }
