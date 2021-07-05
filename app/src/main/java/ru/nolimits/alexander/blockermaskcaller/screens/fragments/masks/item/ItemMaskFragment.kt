@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_new_mask.*
 import kotlinx.coroutines.launch
@@ -116,9 +117,7 @@ class ItemMaskFragment : Fragment() {
                         title = name_mask.text.toString()
                     )
                 )
-                fm.commit {
-                    replace(R.id.fragment_container_view, MasksListFragment.newInstance())
-                }
+                findNavController().navigate(R.id.itemMaskFragment)
             } else if (phone_mask.text.length == 7) {
                 viewModel.insert(
                     Mask(
@@ -126,9 +125,7 @@ class ItemMaskFragment : Fragment() {
                         title = name_mask.text.toString()
                     )
                 )
-                fm.commit {
-                    replace(R.id.fragment_container_view, MasksListFragment.newInstance())
-                }
+                findNavController().navigate(R.id.itemMaskFragment)
             } else {
                 phone_mask.error = phoneNumberAlertText
             }
@@ -138,9 +135,7 @@ class ItemMaskFragment : Fragment() {
             if (idMask != null) {
                 viewModel.delete(idMask!!)
             }
-            fm.commit {
-                replace(R.id.fragment_container_view, MasksListFragment.newInstance())
-            }
+            findNavController().navigate(R.id.itemMaskFragment)
         }
     }
 }

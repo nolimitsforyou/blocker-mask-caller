@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,10 +50,7 @@ class MasksListFragment @Inject constructor(): Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.add_new_mask -> {
-                fm.commit {
-                    addToBackStack(null)
-                    replace(R.id.fragment_container_view, ItemMaskFragment.newInstance())
-                }
+                findNavController().navigate(R.id.itemMaskFragment)
                 true
             }
             R.id.delete_all_masks -> {

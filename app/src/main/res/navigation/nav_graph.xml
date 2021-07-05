@@ -5,15 +5,16 @@
     app:startDestination="@id/masksListFragment">
 
     <fragment
-        android:id="@+id/itemMaskFragment"
-        android:name="ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment"
-        android:label="ItemMaskFragment" />
-    <fragment
         android:id="@+id/masksListFragment"
         android:name="ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment"
         android:label="MasksListFragment" >
         <action
             android:id="@+id/action_masksListFragment_to_itemMaskFragment"
             app:destination="@id/itemMaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemMaskFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment"
+        android:label="ItemMaskFragment" >
     </fragment>
 </navigation>
