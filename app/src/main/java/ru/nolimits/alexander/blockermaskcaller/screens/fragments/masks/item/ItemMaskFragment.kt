@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -19,13 +18,13 @@ import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
-import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ItemMaskFragment : Fragment() {
 
-    @Inject lateinit var repository: MasksRepository
+    @Inject
+    lateinit var repository: MasksRepository
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory

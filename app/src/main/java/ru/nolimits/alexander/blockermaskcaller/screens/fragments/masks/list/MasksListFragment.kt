@@ -10,7 +10,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,15 +20,15 @@ import kotlinx.android.synthetic.main.fragment_list_masks.*
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
-import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
 import ru.nolimits.alexander.blockermaskcaller.shared.Communicator
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MasksListFragment @Inject constructor(): Fragment() {
+class MasksListFragment @Inject constructor() : Fragment() {
 
-    @Inject lateinit var repository: MasksRepository
+    @Inject
+    lateinit var repository: MasksRepository
     private val readPhoneStatePermission = Manifest.permission.READ_PHONE_STATE
     private val requestCodeReadPhoneState = 1
     private lateinit var viewModel: ListMasksViewModel
@@ -37,10 +36,6 @@ class MasksListFragment @Inject constructor(): Fragment() {
     private lateinit var fm: FragmentManager
     private lateinit var communicator: Communicator
 
-
-    companion object {
-        fun newInstance(): MasksListFragment = MasksListFragment()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_masks, menu)
