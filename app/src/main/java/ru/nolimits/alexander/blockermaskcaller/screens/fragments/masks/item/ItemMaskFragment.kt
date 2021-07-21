@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_new_mask.*
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class ItemMaskFragment : Fragment() {
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
-    private lateinit var fm: FragmentManager
+    private lateinit var navController: NavController
     private var idMask: Int? = null
 
     companion object {
@@ -47,7 +47,8 @@ class ItemMaskFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        fm = activity?.supportFragmentManager!!
+        navController =
+            Navigation.findNavController(requireActivity(), R.id.fragment_container_view)
         phoneNumberAlertText = getString(R.string.alert_phone_number)
         super.onCreate(savedInstanceState)
     }
@@ -116,7 +117,7 @@ class ItemMaskFragment : Fragment() {
                         title = name_mask.text.toString()
                     )
                 )
-                findNavController().navigate(R.id.itemMaskFragment)
+                navController.popBackStack()
             } else if (phone_mask.text.length == 7) {
                 viewModel.insert(
                     Mask(
@@ -124,7 +125,7 @@ class ItemMaskFragment : Fragment() {
                         title = name_mask.text.toString()
                     )
                 )
-                findNavController().navigate(R.id.itemMaskFragment)
+                navController.popBackStack()
             } else {
                 phone_mask.error = phoneNumberAlertText
             }
@@ -134,7 +135,7 @@ class ItemMaskFragment : Fragment() {
             if (idMask != null) {
                 viewModel.delete(idMask!!)
             }
-            findNavController().navigate(R.id.itemMaskFragment)
+            navController.popBackStack()
         }
     }
 }
