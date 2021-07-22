@@ -21,7 +21,6 @@ import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
-import ru.nolimits.alexander.blockermaskcaller.shared.Communicator
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -34,8 +33,6 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var viewModelFactory: ListMasksViewModelFactory
     private lateinit var fm: FragmentManager
-    private lateinit var communicator: Communicator
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_masks, menu)
@@ -68,8 +65,6 @@ class MasksListFragment @Inject constructor() : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        communicator = activity as Communicator
-
         viewModelFactory =
             ListMasksViewModelFactory(repository)
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
@@ -83,7 +78,10 @@ class MasksListFragment @Inject constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
-                communicator.sendData(item)
+                findNavController().navigate(
+                    MasksListFragmentDirections
+                        .actionMasksListFragmentToItemMaskFragment(item.id)
+                )
             }
         })
 

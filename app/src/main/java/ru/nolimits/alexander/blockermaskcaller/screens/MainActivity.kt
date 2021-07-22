@@ -3,18 +3,13 @@ package ru.nolimits.alexander.blockermaskcaller.screens
 import android.app.role.RoleManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nolimits.alexander.blockermaskcaller.R
-import ru.nolimits.alexander.blockermaskcaller.data.Mask
-import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
-import ru.nolimits.alexander.blockermaskcaller.shared.Communicator
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), Communicator {
+class MainActivity : AppCompatActivity() {
 
     private val REQUEST_ID = 1
     private lateinit var navController: NavController
@@ -26,14 +21,6 @@ class MainActivity : AppCompatActivity(), Communicator {
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
         requestRole()
-    }
-
-    override fun sendData(mask: Mask) {
-        val fr = ItemMaskFragment.newInstance(mask)
-        supportFragmentManager.commit {
-            addToBackStack(null)
-            replace(R.id.fragment_container_view, fr)
-        }
     }
 
     private fun requestRole() {

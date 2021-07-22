@@ -16,5 +16,7 @@
         android:id="@+id/itemMaskFragment"
         android:name="ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment"
         android:label="ItemMaskFragment" >
+        <argument android:name="idMask"
+            app:argType="integer" />
     </fragment>
 </navigation>

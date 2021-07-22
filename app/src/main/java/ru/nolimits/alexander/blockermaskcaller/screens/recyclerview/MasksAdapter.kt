@@ -39,8 +39,8 @@ class MasksAdapter(
             maskNameTextView.text = item.title
             maskNumberTextView.text = item.numeric
             itemView.setOnClickListener {
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    callback.onItemClicked(masksList[adapterPosition])
+                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                    callback.onItemClicked(masksList[bindingAdapterPosition])
                 }
             }
         }

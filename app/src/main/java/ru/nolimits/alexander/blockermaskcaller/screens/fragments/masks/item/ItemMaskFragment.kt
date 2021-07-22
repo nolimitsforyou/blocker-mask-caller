@@ -31,25 +31,12 @@ class ItemMaskFragment : Fragment() {
     private lateinit var navController: NavController
     private var idMask: Int? = null
 
-    companion object {
-
-        const val MASK_ID = "mask_id"
-
-        fun newInstance(mask: Mask? = null): ItemMaskFragment {
-            val fr = ItemMaskFragment()
-            if (mask != null) {
-                val bundle = Bundle()
-                bundle.putInt(MASK_ID, mask.id)
-                fr.arguments = bundle
-            }
-            return fr
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         navController =
             Navigation.findNavController(requireActivity(), R.id.fragment_container_view)
         phoneNumberAlertText = getString(R.string.alert_phone_number)
+        idMask = savedInstanceState?.let { ItemMaskFragmentArgs.fromBundle(it).idMask }
         super.onCreate(savedInstanceState)
     }
 
@@ -63,8 +50,6 @@ class ItemMaskFragment : Fragment() {
 
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
-
-        idMask = arguments?.getInt(MASK_ID)
 
         idMask?.let {
             lifecycleScope.launch {
