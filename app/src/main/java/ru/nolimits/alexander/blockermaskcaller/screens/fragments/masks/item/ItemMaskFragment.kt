@@ -29,14 +29,21 @@ class ItemMaskFragment : Fragment() {
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var navController: NavController
-    private var idMask: Int? = null
+    private var maskItem: Mask? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         navController =
             Navigation.findNavController(requireActivity(), R.id.fragment_container_view)
         phoneNumberAlertText = getString(R.string.alert_phone_number)
-        idMask = savedInstanceState?.let { ItemMaskFragmentArgs.fromBundle(it).idMask }
+        //TODO может быть null - надо учесть
+        val bundle = arguments
+        if (bundle == null) {
+            Log.e("MaskCall", "ItemMaskFragment не получил информацию о маске")
+            return
+        }
+        val args = bundle.let { ItemMaskFragmentArgs.fromBundle(it) }
+        maskItem = args.maskItem
         super.onCreate(savedInstanceState)
     }
 
@@ -51,11 +58,10 @@ class ItemMaskFragment : Fragment() {
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
 
-        idMask?.let {
+        maskItem?.let {
             lifecycleScope.launch {
-                val mask = viewModel.getMaskById(it)
-                name_mask.setText(mask.title)
-                phone_mask.setText(mask.numeric)
+                name_mask.setText(it.title)
+                phone_mask.setText(it.numeric)
                 phone_mask.addTextChangedListener(object : TextWatcher {
 
                     override fun beforeTextChanged(
@@ -94,10 +100,10 @@ class ItemMaskFragment : Fragment() {
 
         button_add.setOnClickListener {
 
-            if (idMask != null && phone_mask.text.length == 7) {
+            if (maskItem != null && phone_mask.text.length == 7) {
                 viewModel.update(
                     Mask(
-                        id = idMask!!,
+                        id = maskItem!!.id,
                         numeric = phone_mask.text.toString(),
                         title = name_mask.text.toString()
                     )
@@ -117,8 +123,8 @@ class ItemMaskFragment : Fragment() {
         }
 
         button_delete.setOnClickListener {
-            if (idMask != null) {
-                viewModel.delete(idMask!!)
+            if (maskItem != null) {
+                viewModel.delete(maskItem!!.id)
             }
             navController.popBackStack()
         }

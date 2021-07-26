@@ -80,7 +80,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
             override fun onItemClicked(item: Mask) {
                 findNavController().navigate(
                     MasksListFragmentDirections
-                        .actionMasksListFragmentToItemMaskFragment(item.id)
+                        .actionMasksListFragmentToItemMaskFragment(item)
                 )
             }
         })
