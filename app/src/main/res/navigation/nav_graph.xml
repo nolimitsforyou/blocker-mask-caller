@@ -18,6 +18,7 @@
         android:label="ItemMaskFragment" >
         <argument android:name="maskItem"
             app:argType="ru.nolimits.alexander.blockermaskcaller.data.Mask"
-            app:nullable="true" />
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
