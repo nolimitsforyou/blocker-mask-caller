@@ -68,7 +68,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         viewModelFactory =
             ListMasksViewModelFactory(repository)
