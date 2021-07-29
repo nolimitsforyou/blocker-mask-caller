@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
-import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListItemBinding
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListMasksBinding
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
@@ -31,10 +30,8 @@ class MasksListFragment @Inject constructor() : Fragment() {
     lateinit var repository: MasksRepository
     private val readPhoneStatePermission = Manifest.permission.READ_PHONE_STATE
     private val requestCodeReadPhoneState = 1
-    private var _binding: FragmentListItemBinding? = null
-    private var _bindingList: FragmentListMasksBinding? = null
-    private val binding get() = _binding!!
-    private val bindingRecyclerView get() = _bindingList!!
+    private var _bindingRecyclerView: FragmentListMasksBinding? = null
+    private val bindingRecyclerView get() = _bindingRecyclerView!!
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var viewModelFactory: ListMasksViewModelFactory
     private lateinit var fm: FragmentManager
@@ -75,10 +72,9 @@ class MasksListFragment @Inject constructor() : Fragment() {
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ListMasksViewModel::class.java)
+        _bindingRecyclerView = FragmentListMasksBinding.inflate(inflater, container, false)
 
-        _binding = FragmentListItemBinding.inflate(inflater, container, false)
-        _bindingList = FragmentListMasksBinding.inflate(inflater, container, false)
-        return binding.root
+        return bindingRecyclerView.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
