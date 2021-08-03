@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "435969866186",
+    "project_id": "blocker-mask-caller",
+    "storage_bucket": "blocker-mask-caller.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435969866186:android:53f3b414cf10ac48d03733",
+        "android_client_info": {
+          "package_name": "ru.nolimits.alexander.blocker_mask_caller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435969866186-s7p9t2i2ohaho9apm05889qvd5stdj6q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.nolimits.alexander.blocker_mask_caller",
+            "certificate_hash": "944f3f35ec409752c9c044e0e58338d648782ba2"
+          }
+        },
+        {
+          "client_id": "435969866186-qp6no0tb2r0nisbh6nlr385eggk55dl8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhH4LZYuKy8RBVAtB_HL6r9tdxTxyEpHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435969866186-qp6no0tb2r0nisbh6nlr385eggk55dl8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
