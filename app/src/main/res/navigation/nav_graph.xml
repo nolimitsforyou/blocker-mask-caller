@@ -10,7 +10,8 @@
         android:label="MasksListFragment" >
         <action
             android:id="@+id/action_masksListFragment_to_itemMaskFragment"
-            app:destination="@id/itemMaskFragment" />
+            app:destination="@id/itemMaskFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/itemMaskFragment"
