@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/masksListFragment">
+
+    <fragment
+        android:id="@+id/masksListFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment"
+        android:label="MasksListFragment" >
+        <action
+            android:id="@+id/action_masksListFragment_to_itemMaskFragment"
+            app:destination="@id/itemMaskFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemMaskFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment"
+        android:label="ItemMaskFragment" >
+        <argument android:name="maskItem"
+            app:argType="ru.nolimits.alexander.blockermaskcaller.data.Mask"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>

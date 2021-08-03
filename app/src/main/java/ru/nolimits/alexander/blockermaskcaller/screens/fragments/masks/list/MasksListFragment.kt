@@ -10,36 +10,31 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_list_masks.*
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
+import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListMasksBinding
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
-import ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment
 import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
-import ru.nolimits.alexander.blockermaskcaller.shared.Communicator
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MasksListFragment @Inject constructor(): Fragment() {
+class MasksListFragment @Inject constructor() : Fragment() {
 
-    @Inject lateinit var repository: MasksRepository
+    @Inject
+    lateinit var repository: MasksRepository
     private val readPhoneStatePermission = Manifest.permission.READ_PHONE_STATE
     private val requestCodeReadPhoneState = 1
+    private var _bindingRecyclerView: FragmentListMasksBinding? = null
+    private val bindingRecyclerView get() = _bindingRecyclerView!!
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var viewModelFactory: ListMasksViewModelFactory
     private lateinit var fm: FragmentManager
-    private lateinit var communicator: Communicator
-
-
-    companion object {
-        fun newInstance(): MasksListFragment = MasksListFragment()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_masks, menu)
@@ -49,10 +44,7 @@ class MasksListFragment @Inject constructor(): Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.add_new_mask -> {
-                fm.commit {
-                    addToBackStack(null)
-                    replace(R.id.fragment_container_view, ItemMaskFragment.newInstance())
-                }
+                findNavController().navigate(R.id.itemMaskFragment)
                 true
             }
             R.id.delete_all_masks -> {
@@ -73,28 +65,30 @@ class MasksListFragment @Inject constructor(): Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        communicator = activity as Communicator
+    ): View {
 
         viewModelFactory =
             ListMasksViewModelFactory(repository)
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ListMasksViewModel::class.java)
+        _bindingRecyclerView = FragmentListMasksBinding.inflate(inflater, container, false)
 
-        return inflater.inflate(R.layout.fragment_list_masks, container, false)
+        return bindingRecyclerView.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
-                communicator.sendData(item)
+                findNavController().navigate(
+                    MasksListFragmentDirections
+                        .actionMasksListFragmentToItemMaskFragment(item)
+                )
             }
         })
 
-        masks_recyclerview.apply {
+        bindingRecyclerView.masksRecyclerview.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = adapterMasks
         }
@@ -124,11 +118,11 @@ class MasksListFragment @Inject constructor(): Fragment() {
                 val position = viewHolder.adapterPosition
                 val maskId = viewModel.allMasks.value?.get(position)?.id
                 viewModel.delete(maskId!!)
-                masks_recyclerview.adapter!!.notifyItemRemoved(position)
+                bindingRecyclerView.masksRecyclerview.adapter!!.notifyItemRemoved(position)
             }
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(masks_recyclerview)
+        itemTouchHelper.attachToRecyclerView(bindingRecyclerView.masksRecyclerview)
     }
 
     private fun checkPermission() {
