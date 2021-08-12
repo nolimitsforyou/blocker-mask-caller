@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list
+package ru.nolimits.alexander.blockermaskcaller.view.fragments
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -20,7 +20,9 @@ import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListMasksBinding
 import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
-import ru.nolimits.alexander.blockermaskcaller.screens.recyclerview.MasksAdapter
+import ru.nolimits.alexander.blockermaskcaller.view.models.ListMasksViewModel
+import ru.nolimits.alexander.blockermaskcaller.view.models.ListMasksViewModelFactory
+import ru.nolimits.alexander.blockermaskcaller.view.recycler.MasksAdapter
 import javax.inject.Inject
 
 @AndroidEntryPoint

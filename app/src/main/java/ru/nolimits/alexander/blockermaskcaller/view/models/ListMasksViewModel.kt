@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list
+package ru.nolimits.alexander.blockermaskcaller.view.models
 
 import android.util.Log
 import androidx.lifecycle.*

@@ -3,7 +3,7 @@
     <string name="name_mask">Имя</string>
     <string name="alert_phone_number">"введите не менее 7 цифр номера"</string>
     <string name="phone_number_placeholder">7 999 888</string>
-    <string name="button_ok">ok</string>
+    <string name="button_ok">OK</string>
     <string name="button_save">сохранить</string>
     <string name="button_delete">удалить</string>
     <string name="button_close">закрыть</string>
@@ -11,4 +11,6 @@
     <string name="alert_dialog_message">
         Для корректной работы Blocker Mask Caller необходимо предоставить ему разрешение на доступ к телефону
     </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
