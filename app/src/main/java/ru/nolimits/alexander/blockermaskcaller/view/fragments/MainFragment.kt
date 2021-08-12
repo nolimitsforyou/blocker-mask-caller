@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation.findNavController
+import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentMainBinding
 import ru.nolimits.alexander.blockermaskcaller.view.models.LoginViewModel
 
@@ -22,5 +24,24 @@ class MainFragment : Fragment() {
 
         binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    private fun observeAuthenticationState() {
+
+        viewModel.authenticationState.observe(viewLifecycleOwner, { authenticationState ->
+            when (authenticationState) {
+                LoginViewModel.AuthenticationState.AUTHENTICATED -> {
+
+                    binding.accountButton.setOnClickListener {
+                        findNavController().navigate(R.id.accountFragment)
+                    }
+                }
+                else -> {
+                    binding.accountButton.setOnClickListener {
+                        findNavController().navigate(R.id.loginFragment)
+                    }
+                }
+            }
+        })
     }
 }
