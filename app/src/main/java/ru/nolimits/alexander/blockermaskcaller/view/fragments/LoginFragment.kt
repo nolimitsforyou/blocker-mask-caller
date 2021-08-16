@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller
+package ru.nolimits.alexander.blockermaskcaller.view.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -16,6 +16,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentLoginBinding
 import ru.nolimits.alexander.blockermaskcaller.view.models.LoginViewModel
 

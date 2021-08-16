@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
     <fragment
         android:id="@+id/masksListFragment"
@@ -37,8 +40,13 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="ru.nolimits.alexander.blockermaskcaller.LoginFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.view.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 
 </navigation>
