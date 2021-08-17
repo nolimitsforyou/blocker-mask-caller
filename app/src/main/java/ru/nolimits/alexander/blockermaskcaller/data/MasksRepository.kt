@@ -1,11 +1,9 @@
-package ru.nolimits.alexander.blockermaskcaller.repository
+package ru.nolimits.alexander.blockermaskcaller.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
-import ru.nolimits.alexander.blockermaskcaller.data.Mask
-import ru.nolimits.alexander.blockermaskcaller.data.MaskDao
 import javax.inject.Inject
 import javax.inject.Singleton
 

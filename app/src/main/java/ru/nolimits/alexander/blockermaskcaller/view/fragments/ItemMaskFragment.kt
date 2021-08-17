@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentNewMaskBinding
-import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
+import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModel
 import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModelFactory
 import javax.inject.Inject

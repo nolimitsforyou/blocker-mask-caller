@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
-import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
+import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 
 class ListMasksViewModel(private val repository: MasksRepository) : ViewModel() {
 
