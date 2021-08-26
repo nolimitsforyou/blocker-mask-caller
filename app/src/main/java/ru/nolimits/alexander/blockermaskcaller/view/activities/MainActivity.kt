@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller.screens
+package ru.nolimits.alexander.blockermaskcaller.view.activities
 
 import android.app.role.RoleManager
 import android.os.Bundle

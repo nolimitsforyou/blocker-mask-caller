@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/masksListFragment"
-        android:name="ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.list.MasksListFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.view.fragments.MasksListFragment"
         android:label="MasksListFragment" >
         <action
             android:id="@+id/action_masksListFragment_to_itemMaskFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemMaskFragment"
-        android:name="ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item.ItemMaskFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.view.fragments.ItemMaskFragment"
         android:label="ItemMaskFragment" >
         <argument android:name="maskItem"
             app:argType="ru.nolimits.alexander.blockermaskcaller.data.Mask"

@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller.screens.recyclerview
+package ru.nolimits.alexander.blockermaskcaller.view.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

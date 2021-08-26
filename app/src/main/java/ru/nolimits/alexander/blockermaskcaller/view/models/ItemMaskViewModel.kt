@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
+package ru.nolimits.alexander.blockermaskcaller.view.models
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
-import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
+import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 
 
 class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {

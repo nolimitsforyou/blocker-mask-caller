@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller.repository
+package ru.nolimits.alexander.blockermaskcaller.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
