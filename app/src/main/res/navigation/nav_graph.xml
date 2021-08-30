@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/masksListFragment">
+    app:startDestination="@id/emptyMasksFragment">
 
     <fragment
         android:id="@+id/masksListFragment"
@@ -21,5 +22,14 @@
             app:argType="ru.nolimits.alexander.blockermaskcaller.data.Mask"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/emptyMasksFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.view.fragments.EmptyMasksFragment"
+        android:label="empty_masks_fragment"
+        tools:layout="@layout/empty_masks_fragment" >
+        <action
+            android:id="@+id/action_emptyMasksFragment_to_masksListFragment"
+            app:destination="@id/masksListFragment" />
     </fragment>
 </navigation>
