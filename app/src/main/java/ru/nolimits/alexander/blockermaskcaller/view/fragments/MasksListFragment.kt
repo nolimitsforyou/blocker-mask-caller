@@ -36,7 +36,6 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private val bindingRecyclerView get() = _bindingRecyclerView!!
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var viewModelFactory: ListMasksViewModelFactory
-    private lateinit var fm: FragmentManager
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_masks, menu)
@@ -58,7 +57,6 @@ class MasksListFragment @Inject constructor() : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        fm = activity?.supportFragmentManager!!
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
     }
