@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/emptyMasksFragment">
+    app:startDestination="@id/masksListFragment">
 
     <fragment
         android:id="@+id/masksListFragment"
@@ -13,6 +13,9 @@
             android:id="@+id/action_masksListFragment_to_itemMaskFragment"
             app:destination="@id/itemMaskFragment"
             app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_masksListFragment_to_emptyMasksFragment"
+            app:destination="@id/emptyMasksFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemMaskFragment"
@@ -29,7 +32,7 @@
         android:label="empty_masks_fragment"
         tools:layout="@layout/empty_masks_fragment" >
         <action
-            android:id="@+id/action_emptyMasksFragment_to_masksListFragment"
-            app:destination="@id/masksListFragment" />
+            android:id="@+id/action_emptyMasksFragment_to_itemMaskFragment"
+            app:destination="@id/itemMaskFragment" />
     </fragment>
 </navigation>
