@@ -17,7 +17,6 @@ import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentNewMaskBinding
 import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModel
-import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModelFactory
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -27,7 +26,6 @@ class ItemMaskFragment : Fragment() {
     lateinit var repository: MasksRepository
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
-    private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var navController: NavController
     private var _binding: FragmentNewMaskBinding? = null
     private val binding get() = _binding!!
@@ -55,10 +53,8 @@ class ItemMaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewModelFactory = ItemMaskViewModelFactory(repository)
-
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ItemMaskViewModel::class.java)
 
         _binding = FragmentNewMaskBinding.inflate(inflater, container, false)
         val view = binding.root

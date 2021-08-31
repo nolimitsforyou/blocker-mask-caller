@@ -4,12 +4,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
+import javax.inject.Inject
 
-
-class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
+@HiltViewModel
+class ItemMaskViewModel @Inject constructor(private val repository: MasksRepository) : ViewModel() {
 
 
     init {
@@ -41,18 +43,5 @@ class ItemMaskViewModel(private val repository: MasksRepository) : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         Log.i("NewMaskViewModel", "NewMaskViewModel destroyed!")
-    }
-}
-
-class ItemMaskViewModelFactory(private val repository: MasksRepository) :
-    ViewModelProvider.Factory {
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-
-        if (modelClass.isAssignableFrom(ItemMaskViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return ItemMaskViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

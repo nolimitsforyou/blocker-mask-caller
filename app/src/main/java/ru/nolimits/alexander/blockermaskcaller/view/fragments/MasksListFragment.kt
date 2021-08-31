@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -18,11 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
-import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListMasksBinding
 import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
-import ru.nolimits.alexander.blockermaskcaller.view.recycler.MasksAdapter
+import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListMasksBinding
 import ru.nolimits.alexander.blockermaskcaller.view.models.ListMasksViewModel
-import ru.nolimits.alexander.blockermaskcaller.view.models.ListMasksViewModelFactory
+import ru.nolimits.alexander.blockermaskcaller.view.recycler.MasksAdapter
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,7 +33,6 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private var _bindingRecyclerView: FragmentListMasksBinding? = null
     private val bindingRecyclerView get() = _bindingRecyclerView!!
     private lateinit var viewModel: ListMasksViewModel
-    private lateinit var viewModelFactory: ListMasksViewModelFactory
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_masks, menu)
@@ -67,11 +64,9 @@ class MasksListFragment @Inject constructor() : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewModelFactory =
-            ListMasksViewModelFactory(repository)
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ListMasksViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ListMasksViewModel::class.java)
         _bindingRecyclerView = FragmentListMasksBinding.inflate(inflater, container, false)
 
         return bindingRecyclerView.root
