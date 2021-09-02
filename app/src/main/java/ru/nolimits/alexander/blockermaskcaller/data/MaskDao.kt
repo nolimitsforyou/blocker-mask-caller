@@ -21,9 +21,9 @@ interface MaskDao {
     @Query("DELETE FROM masks_table")
     fun deleteAll()
 
-    @Query("SELECT * FROM masks_table WHERE id = :idMask")
-    fun getMaskById(idMask: Int): Flow<Mask>
-
     @Query("SELECT * FROM masks_table WHERE numeric = :number")
     fun getMaskByNumeric(number: Int): Mask?
+
+    @Query("SELECT COUNT(*) masks_table")
+    fun getMasksCount(): Int
 }

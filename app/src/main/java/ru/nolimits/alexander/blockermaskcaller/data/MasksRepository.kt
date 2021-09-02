@@ -2,10 +2,7 @@ package ru.nolimits.alexander.blockermaskcaller.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
-import ru.nolimits.alexander.blockermaskcaller.data.Mask
-import ru.nolimits.alexander.blockermaskcaller.data.MaskDao
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -39,15 +36,15 @@ class MasksRepository @Inject constructor(private val masksDao: MaskDao) {
         }
     }
 
-    suspend fun getMaskById(idMask: Int): Mask {
-        return withContext(Dispatchers.IO) {
-            masksDao.getMaskById(idMask).first()
-        }
-    }
-
     suspend fun getMaskByNumber(number: Int): Mask? {
         return withContext(Dispatchers.IO) {
             masksDao.getMaskByNumeric(number)
+        }
+    }
+
+    suspend fun getCountOfMasks(): Int {
+        return withContext(Dispatchers.IO) {
+            masksDao.getMasksCount()
         }
     }
 }

@@ -2,7 +2,6 @@ package ru.nolimits.alexander.blockermaskcaller.view.models
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -34,10 +33,6 @@ class ItemMaskViewModel @Inject constructor(private val repository: MasksReposit
         viewModelScope.launch {
             repository.delete(id)
         }
-    }
-
-    suspend fun getMaskById(idMask: Int): Mask {
-        return repository.getMaskById(idMask)
     }
 
     override fun onCleared() {
