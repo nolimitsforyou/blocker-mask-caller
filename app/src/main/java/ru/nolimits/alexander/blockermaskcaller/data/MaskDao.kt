@@ -24,6 +24,6 @@ interface MaskDao {
     @Query("SELECT * FROM masks_table WHERE numeric = :number")
     fun getMaskByNumeric(number: Int): Mask?
 
-    @Query("SELECT COUNT(*) masks_table")
+    @Query("SELECT COUNT(*) FROM masks_table")
     fun getMasksCount(): Int
 }

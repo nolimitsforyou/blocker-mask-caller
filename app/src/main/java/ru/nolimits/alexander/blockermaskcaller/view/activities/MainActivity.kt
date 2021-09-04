@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         //TODO возможно в активити определять есть ли маски и запускать соотв. фрагмент
         val model: ListMasksViewModel by viewModels()
-
         val count = model.getCountMasks()
 
         requestRole()
