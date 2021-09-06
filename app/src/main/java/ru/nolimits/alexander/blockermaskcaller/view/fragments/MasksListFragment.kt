@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -19,6 +20,7 @@ import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListMasksBinding
+import ru.nolimits.alexander.blockermaskcaller.view.models.CreatedMasksViewModel
 import ru.nolimits.alexander.blockermaskcaller.view.models.ListMasksViewModel
 import ru.nolimits.alexander.blockermaskcaller.view.recycler.MasksAdapter
 import javax.inject.Inject
@@ -32,6 +34,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private val requestCodeReadPhoneState = 1
     private var _bindingRecyclerView: FragmentListMasksBinding? = null
     private val bindingRecyclerView get() = _bindingRecyclerView!!
+    private val createdMasksViewModel: CreatedMasksViewModel by activityViewModels()
     private lateinit var viewModel: ListMasksViewModel
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -75,6 +78,15 @@ class MasksListFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        createdMasksViewModel.allMasks.observe(viewLifecycleOwner, {
+            it?.let {
+                if (it.isNotEmpty()) {
+                    findNavController().navigate(R.id.emptyMasksFragment)
+                }
+            }
+        })
+
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
                 findNavController().navigate(

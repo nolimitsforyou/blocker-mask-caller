@@ -7,7 +7,6 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 import javax.inject.Inject
@@ -37,11 +36,5 @@ class ListMasksViewModel @Inject constructor(private val repository: MasksReposi
         viewModelScope.launch {
             repository.delete(id)
         }
-    }
-
-    fun getCountMasks(): Int {
-       return runBlocking {
-           repository.getCountOfMasks()
-       }
     }
 }
