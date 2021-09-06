@@ -67,7 +67,13 @@ class MasksListFragment @Inject constructor() : Fragment() {
         Log.i("MasksListFragment", "Called ListMasksViewModel.get")
 
         viewModel = ViewModelProvider(this).get(ListMasksViewModel::class.java)
-        _bindingRecyclerView = FragmentListMasksBinding.inflate(inflater, container, false)
+
+
+        if (viewModel.getCountMasks() > 0) {
+
+        } else {
+            _bindingRecyclerView = FragmentListMasksBinding.inflate(inflater, container, false)
+        }
 
         return bindingRecyclerView.root
     }
