@@ -15,15 +15,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentNewMaskBinding
-import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModel
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ItemMaskFragment : Fragment() {
 
-    @Inject
-    lateinit var repository: MasksRepository
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var navController: NavController

@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
-import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListMasksBinding
 import ru.nolimits.alexander.blockermaskcaller.view.models.CreatedMasksViewModel
 import ru.nolimits.alexander.blockermaskcaller.view.models.ListMasksViewModel
@@ -28,8 +27,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MasksListFragment @Inject constructor() : Fragment() {
 
-    @Inject
-    lateinit var repository: MasksRepository
     private val readPhoneStatePermission = Manifest.permission.READ_PHONE_STATE
     private val requestCodeReadPhoneState = 1
     private var _bindingRecyclerView: FragmentListMasksBinding? = null
@@ -81,7 +78,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
 
         createdMasksViewModel.allMasks.observe(viewLifecycleOwner, {
             it?.let {
-                if (it.isNotEmpty()) {
+                if (it.isEmpty()) {
                     findNavController().navigate(R.id.emptyMasksFragment)
                 }
             }
