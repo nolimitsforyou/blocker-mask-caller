@@ -103,7 +103,7 @@ class ItemMaskFragment : Fragment() {
                         title = binding.nameMask.text.toString()
                     )
                 )
-                navController.popBackStack()
+                navController.navigate(R.id.masksListFragment)
             } else if (binding.phoneMask.text.length == 7) {
                 viewModel.insert(
                     Mask(
@@ -111,7 +111,7 @@ class ItemMaskFragment : Fragment() {
                         title = binding.nameMask.text.toString()
                     )
                 )
-                navController.popBackStack()
+                navController.navigate(R.id.masksListFragment)
             } else {
                 binding.phoneMask.error = phoneNumberAlertText
             }
@@ -121,7 +121,7 @@ class ItemMaskFragment : Fragment() {
             if (maskItem != null) {
                 viewModel.delete(maskItem!!.id)
             }
-            navController.popBackStack()
+            navController.navigate(R.id.masksListFragment)
         }
     }
 
