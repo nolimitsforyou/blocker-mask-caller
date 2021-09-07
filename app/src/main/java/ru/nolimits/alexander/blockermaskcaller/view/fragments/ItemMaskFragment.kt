@@ -20,6 +20,10 @@ import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModel
 @AndroidEntryPoint
 class ItemMaskFragment : Fragment() {
 
+    companion object {
+        const val ADDED_NEW_MASK: String = "ADDED_NEW_MASK"
+    }
+
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var navController: NavController
