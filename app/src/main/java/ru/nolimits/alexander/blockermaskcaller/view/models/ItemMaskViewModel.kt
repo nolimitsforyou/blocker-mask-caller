@@ -1,7 +1,9 @@
 package ru.nolimits.alexander.blockermaskcaller.view.models
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -11,6 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ItemMaskViewModel @Inject constructor(private val repository: MasksRepository) : ViewModel() {
+
+    val allMasks: LiveData<List<Mask>> = repository.allMasks.asLiveData()
 
     fun insert(mask: Mask) {
         viewModelScope.launch {

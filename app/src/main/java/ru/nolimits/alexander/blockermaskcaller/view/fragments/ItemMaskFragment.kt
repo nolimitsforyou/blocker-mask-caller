@@ -20,10 +20,6 @@ import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModel
 @AndroidEntryPoint
 class ItemMaskFragment : Fragment() {
 
-    companion object {
-        const val ADDED_NEW_MASK: String = "ADDED_NEW_MASK"
-    }
-
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var navController: NavController
@@ -53,11 +49,15 @@ class ItemMaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        Log.i("MasksListFragment", "Called ListMasksViewModel.get")
         viewModel = ViewModelProvider(this).get(ItemMaskViewModel::class.java)
 
         _binding = FragmentNewMaskBinding.inflate(inflater, container, false)
+
         val view = binding.root
+
+        if (maskItem == null) {
+            binding.buttonDelete.text = getString(R.string.button_cancel)
+        }
 
         maskItem?.let {
             binding.nameMask.setText(it.title)
