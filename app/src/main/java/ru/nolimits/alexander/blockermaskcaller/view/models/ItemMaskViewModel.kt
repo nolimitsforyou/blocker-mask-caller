@@ -12,11 +12,6 @@ import javax.inject.Inject
 @HiltViewModel
 class ItemMaskViewModel @Inject constructor(private val repository: MasksRepository) : ViewModel() {
 
-
-    init {
-        Log.i("NewMaskViewModel", "NewMaskViewModel created!")
-    }
-
     fun insert(mask: Mask) {
         viewModelScope.launch {
             repository.insert(mask)

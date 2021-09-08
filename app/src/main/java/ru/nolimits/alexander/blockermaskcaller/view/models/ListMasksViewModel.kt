@@ -17,10 +17,6 @@ class ListMasksViewModel @Inject constructor(private val repository: MasksReposi
 
     val allMasks: LiveData<List<Mask>> = repository.allMasks.asLiveData()
 
-    init {
-        Log.i("ListMasksViewModel", "ListMasksViewModel created!")
-    }
-
     override fun onCleared() {
         super.onCleared()
         Log.i("ListMasksViewModel", "ListMasksViewModel destroyed!")
