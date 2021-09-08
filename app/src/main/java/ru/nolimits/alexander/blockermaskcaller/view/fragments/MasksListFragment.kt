@@ -31,7 +31,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private val requestCodeReadPhoneState = 1
     private var _bindingRecyclerView: FragmentListMasksBinding? = null
     private val bindingRecyclerView get() = _bindingRecyclerView!!
-    private val createdMasksViewModel: CreatedMasksViewModel by activityViewModels()
+//    private val createdMasksViewModel: CreatedMasksViewModel by activityViewModels()
     private lateinit var viewModel: ListMasksViewModel
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -76,7 +76,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createdMasksViewModel.allMasks.observe(viewLifecycleOwner, {
+        viewModel.allMasks.observe(viewLifecycleOwner, {
             it?.let {
                 if (it.isEmpty()) {
                     findNavController().navigate(R.id.emptyMasksFragment)
