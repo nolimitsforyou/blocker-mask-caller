@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.data.MaskDao
 
-@Database(entities = arrayOf(Mask::class), version = 1)
+@Database(entities = [Mask::class], version = 1)
 abstract class PhoneMasksDataBase : RoomDatabase() {
 
     abstract fun masksDao(): MaskDao
