@@ -20,6 +20,7 @@ import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModel
 @AndroidEntryPoint
 class ItemMaskFragment : Fragment() {
 
+    private val expectedNumberSize = 7
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
     private lateinit var navController: NavController
@@ -108,7 +109,7 @@ class ItemMaskFragment : Fragment() {
                     )
                 )
                 navController.navigate(R.id.masksListFragment)
-            } else if (binding.phoneMask.text.length == 7) {
+            } else if (binding.phoneMask.text.length == expectedNumberSize) {
                 viewModel.insert(
                     Mask(
                         numeric = binding.phoneMask.text.toString(),

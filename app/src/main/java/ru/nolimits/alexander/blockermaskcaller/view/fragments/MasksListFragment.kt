@@ -9,7 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,6 +57,19 @@ class MasksListFragment @Inject constructor() : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
+//        val navController = findNavController()
+//        val currentBackStackEntry = navController.currentBackStackEntry!!
+//        val savedStateHandle = currentBackStackEntry.savedStateHandle
+//        savedStateHandle.getLiveData<Boolean>(EmptyMasksFragment.USER_PRESS_CANCELED)
+//            .observe(currentBackStackEntry, { success ->
+//                if (!success) {
+//                    val startDestination = navController.graph.startDestination
+//                    val navOptions = NavOptions.Builder()
+//                        .setPopUpTo(startDestination, true)
+//                        .build()
+//                    navController.navigate(startDestination, null, navOptions)
+//                }
+//            })
     }
 
     override fun onCreateView(
