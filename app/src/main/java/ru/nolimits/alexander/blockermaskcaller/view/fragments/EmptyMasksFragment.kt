@@ -22,7 +22,7 @@ class EmptyMasksFragment : Fragment() {
     private var _binding: FragmentEmptyMasksBinding? = null
     private val binding get() = _binding!!
     private lateinit var navController: NavController
-    private lateinit var savedStateHandle: SavedStateHandle
+//    private lateinit var savedStateHandle: SavedStateHandle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,15 +45,15 @@ class EmptyMasksFragment : Fragment() {
 
 //        savedStateHandle = findNavController().previousBackStackEntry!!.savedStateHandle
 //        savedStateHandle.set(USER_PRESS_CANCELED, false)
-
-        binding.buttonCreateNew.setOnClickListener {
-            navController.navigate(R.id.itemMaskFragment)
-        }
-
-        binding.buttonNotNow.setOnClickListener {
-            //TODO убрать, делаем view pager ?
+//
+//        binding.buttonCreateNew.setOnClickListener {
+//            navController.navigate(R.id.itemMaskFragment)
+//        }
+//
+//        binding.buttonNotNow.setOnClickListener {
+//            //TODO убрать, делаем view pager ?
 //            savedStateHandle.set(USER_PRESS_CANCELED, true)
 //            navController.navigate(R.id.masksListFragment)
-        }
+//        }
     }
 }
