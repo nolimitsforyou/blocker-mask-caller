@@ -26,8 +26,8 @@
     </fragment>
     <fragment
         android:id="@+id/emptyMasksFragment"
-        android:name="ru.nolimits.alexander.blockermaskcaller.view.fragments.EmptyMasksFragment"
+        android:name="ru.nolimits.alexander.blockermaskcaller.view.fragments.EducationFragment"
         android:label="fragment_empty_masks"
-        tools:layout="@layout/fragment_empty_masks" />
+        tools:layout="@layout/fragment_education" />
 
 </navigation>
