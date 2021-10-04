@@ -17,4 +17,6 @@
     </string>
     <string name="create_new">создать</string>
     <string name="not_now">позже</string>
+    <string name="skip_education">пропустить</string>
+    <string name="next_education">далее</string>
 </resources>

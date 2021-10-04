@@ -7,16 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentEducationBinding
+import ru.nolimits.alexander.blockermaskcaller.databinding.ItemEducationPageBinding
 import ru.nolimits.alexander.blockermaskcaller.view.recycler.ViewPagerAdapter
 
 @AndroidEntryPoint
 class EducationFragment : Fragment() {
 
-    private var _binding: FragmentEducationBinding? = null
-    private val binding get() = _binding!!
+    private var _bindingViewPager: FragmentEducationBinding? = null
+    private val bindingViewPager get() = _bindingViewPager!!
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,13 +33,19 @@ class EducationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentEducationBinding.inflate(inflater, container, false)
+        _bindingViewPager = FragmentEducationBinding.inflate(inflater, container, false)
 
-        return binding.root
+        return bindingViewPager.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewPager2.adapter = ViewPagerAdapter()
+        bindingViewPager.viewPager2.adapter = ViewPagerAdapter(
+            callBack = object : ViewPagerAdapter.CallBackViewPager {
+                override fun onButtonNextClicked() {
+                    navController.navigate(R.id.itemMaskFragment)
+                }
+            }
+        )
     }
 }
