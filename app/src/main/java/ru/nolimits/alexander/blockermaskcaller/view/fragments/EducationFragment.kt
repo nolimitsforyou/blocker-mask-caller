@@ -50,7 +50,7 @@ class EducationFragment : Fragment() {
             object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    //TODO при смене экрана
+                    //TODO при смене страницы
                 }
             }
         )
