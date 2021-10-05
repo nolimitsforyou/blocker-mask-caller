@@ -39,13 +39,9 @@ class EducationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindingViewPager.viewPager2.adapter = ViewPagerAdapter(
-            callBack = object : ViewPagerAdapter.CallBackViewPager {
-                override fun onButtonNextClicked() {
-                    navController.navigate(R.id.itemMaskFragment)
-                }
-            }
-        )
+
+        bindingViewPager.viewPager2.adapter = ViewPagerAdapter()
+
         bindingViewPager.viewPager2.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

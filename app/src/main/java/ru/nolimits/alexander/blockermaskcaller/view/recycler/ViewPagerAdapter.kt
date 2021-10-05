@@ -3,12 +3,9 @@ package ru.nolimits.alexander.blockermaskcaller.view.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.databinding.ItemEducationPageBinding
 
-class ViewPagerAdapter(
-    val callBack: CallBackViewPager
-) : RecyclerView.Adapter<ViewPagerAdapter.PagerHolder>() {
+class ViewPagerAdapter() : RecyclerView.Adapter<ViewPagerAdapter.PagerHolder>() {
 
     private val listEducationText = listOf(
         """У Вас пока нет ни одного префикса телефонного номера для блокирования вызовов.
@@ -31,19 +28,6 @@ class ViewPagerAdapter(
         with(holder) {
             binding.apply {
                 educationText.text = listEducationText[position]
-
-                if (position == listEducationText.lastIndex) {
-                    buttonNext.apply {
-                        setText(R.string.create_new)
-                        setOnClickListener {
-                            callBack.onButtonNextClicked()
-                        }
-                    }
-                } else {
-                    buttonNext.setOnClickListener {
-                        //TODO переключить viewPager на следующий экран
-                    }
-                }
             }
         }
     }
