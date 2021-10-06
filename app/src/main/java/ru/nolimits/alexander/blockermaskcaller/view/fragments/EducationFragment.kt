@@ -19,6 +19,14 @@ class EducationFragment : Fragment() {
     private var _bindingViewPager: FragmentEducationBinding? = null
     private val bindingViewPager get() = _bindingViewPager!!
     private lateinit var navController: NavController
+    private val listEducationText = listOf(
+        """У Вас пока нет ни одного префикса телефонного номера для блокирования вызовов.
+            | Добавьте первую "маску" для блокировки вызовов по совпадению первых 7
+            | цифр телефонного номера""".trimMargin(),
+        """Номер телефона, начало которого будет соответсвовать первым 7ми цифрам маски,
+            | будет заблокирован. Пример: Вы добавили "маску" +7 999 888. Вам звонит абонент с номером
+            | +7 999 888 77 66 - Такой вызов будет заблокирован""".trimMargin()
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +48,26 @@ class EducationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bindingViewPager.viewPager2.adapter = ViewPagerAdapter()
+        bindingViewPager.apply {
+            viewPagerEducation.adapter = ViewPagerAdapter(listEducationText)
+            buttonNext.setOnClickListener {
+                if (viewPagerEducation.currentItem == listEducationText.lastIndex) {
+                    navController.navigate(R.id.itemMaskFragment)
+                } else {
+                    viewPagerEducation.currentItem +=1
+                }
+            }
+        }
 
-        bindingViewPager.viewPager2.registerOnPageChangeCallback(
+        bindingViewPager.viewPagerEducation.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    //TODO при смене страницы
+                    if (position < listEducationText.lastIndex) {
+                        bindingViewPager.buttonNext.setText(R.string.next_education)
+                    } else if (position == listEducationText.lastIndex) {
+                        bindingViewPager.buttonNext.setText(R.string.create_new)
+                    }
                 }
             }
         )

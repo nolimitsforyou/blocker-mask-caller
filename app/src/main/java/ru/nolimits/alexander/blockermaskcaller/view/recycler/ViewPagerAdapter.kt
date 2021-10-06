@@ -5,16 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.nolimits.alexander.blockermaskcaller.databinding.ItemEducationPageBinding
 
-class ViewPagerAdapter() : RecyclerView.Adapter<ViewPagerAdapter.PagerHolder>() {
-
-    private val listEducationText = listOf(
-        """У Вас пока нет ни одного префикса телефонного номера для блокирования вызовов.
-            | Добавьте первую "маску" для блокировки вызовов по совпадению первых 7
-            | цифр телефонного номера""".trimMargin(),
-        """Номер телефона, начало которого будет соответсвовать первым 7ми цифрам маски,
-            | будет заблокирован. Пример: Вы добавили "маску" +7 999 888. Вам звонит абонент с номером
-            | +7 999 888 77 66 - Такой вызов будет заблокирован""".trimMargin()
-    )
+class ViewPagerAdapter(private val listEducationText: List<String>) :
+    RecyclerView.Adapter<ViewPagerAdapter.PagerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerHolder {
 
@@ -36,9 +28,5 @@ class ViewPagerAdapter() : RecyclerView.Adapter<ViewPagerAdapter.PagerHolder>() 
 
     inner class PagerHolder(val binding: ItemEducationPageBinding) :
         RecyclerView.ViewHolder(binding.root)
-
-    interface CallBackViewPager {
-        fun onButtonNextClicked()
-    }
 }
 
