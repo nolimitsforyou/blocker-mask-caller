@@ -12,6 +12,21 @@
         tools:layout_editor_absoluteY="115dp">
     </androidx.viewpager2.widget.ViewPager2>
 
+    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+        android:id="@+id/worm_dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="100dp"
+        app:dotsColor="@color/purple_200"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="16dp"
+        app:dotsSpacing="4dp"
+        app:dotsStrokeColor="@color/purple_200"
+        app:dotsStrokeWidth="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewPagerEducation"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/button_next"
         android:layout_width="120dp"

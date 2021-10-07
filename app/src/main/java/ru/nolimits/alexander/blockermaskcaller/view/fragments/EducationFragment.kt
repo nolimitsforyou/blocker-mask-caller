@@ -47,9 +47,9 @@ class EducationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         bindingViewPager.apply {
             viewPagerEducation.adapter = ViewPagerAdapter(listEducationText)
+            wormDotsIndicator.setViewPager2(viewPagerEducation)
             buttonNext.setOnClickListener {
                 if (viewPagerEducation.currentItem == listEducationText.lastIndex) {
                     navController.navigate(R.id.itemMaskFragment)
