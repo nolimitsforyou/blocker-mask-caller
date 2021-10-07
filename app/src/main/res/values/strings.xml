@@ -6,9 +6,17 @@
     <string name="button_ok">ok</string>
     <string name="button_save">сохранить</string>
     <string name="button_delete">удалить</string>
+    <string name="button_cancel">отменить</string>
     <string name="button_close">закрыть</string>
     <string name="alert_dialog_title">Необходима настройка</string>
     <string name="alert_dialog_message">
         Для корректной работы Blocker Mask Caller необходимо предоставить ему разрешение на доступ к телефону
     </string>
+    <string name="empty_mask_text">У Вас пока нет ни одного префикса телефонного номера для блокирования вызовов.
+        Добавьте первую "маску" для блокировки вызовов по совпадению первых 7 цифр телефонного номера
+    </string>
+    <string name="create_new">создать</string>
+    <string name="not_now">позже</string>
+    <string name="skip_education">пропустить</string>
+    <string name="next_education">далее</string>
 </resources>

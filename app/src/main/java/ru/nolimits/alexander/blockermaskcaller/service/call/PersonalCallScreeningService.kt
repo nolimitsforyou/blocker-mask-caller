@@ -4,9 +4,10 @@ import android.telecom.Call
 import android.telecom.CallScreeningService
 import android.util.Log
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
+import ru.nolimits.alexander.blockermaskcaller.data.MasksRepository
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -14,6 +15,7 @@ class PersonalCallScreeningService : CallScreeningService() {
 
     @Inject lateinit var repository: MasksRepository
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onScreenCall(callDetails: Call.Details) {
 
         val phoneNumber: Int = getPhoneNumber(callDetails)
@@ -30,6 +32,8 @@ class PersonalCallScreeningService : CallScreeningService() {
         }
     }
 
+
+    @OptIn(DelicateCoroutinesApi::class)
     private suspend fun handlePhoneCall(
         response: CallResponse.Builder,
         phoneNumber: Int

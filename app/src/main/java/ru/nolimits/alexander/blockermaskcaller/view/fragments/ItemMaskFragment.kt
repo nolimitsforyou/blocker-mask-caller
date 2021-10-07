@@ -1,4 +1,4 @@
-package ru.nolimits.alexander.blockermaskcaller.screens.fragments.masks.item
+package ru.nolimits.alexander.blockermaskcaller.view.fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -15,17 +15,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentNewMaskBinding
-import ru.nolimits.alexander.blockermaskcaller.repository.MasksRepository
-import javax.inject.Inject
+import ru.nolimits.alexander.blockermaskcaller.view.models.ItemMaskViewModel
 
 @AndroidEntryPoint
 class ItemMaskFragment : Fragment() {
 
-    @Inject
-    lateinit var repository: MasksRepository
+    private val expectedNumberSize = 7
     private lateinit var phoneNumberAlertText: String
     private lateinit var viewModel: ItemMaskViewModel
-    private lateinit var viewModelFactory: ItemMaskViewModelFactory
     private lateinit var navController: NavController
     private var _binding: FragmentNewMaskBinding? = null
     private val binding get() = _binding!!
@@ -51,15 +48,17 @@ class ItemMaskFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        viewModelFactory = ItemMaskViewModelFactory(repository)
-
-        Log.i("MasksListFragment", "Called ListMasksViewModel.get")
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ItemMaskViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ItemMaskViewModel::class.java)
 
         _binding = FragmentNewMaskBinding.inflate(inflater, container, false)
+
         val view = binding.root
+
+        if (maskItem == null) {
+            binding.buttonDelete.text = getString(R.string.button_cancel)
+        }
 
         maskItem?.let {
             binding.nameMask.setText(it.title)
@@ -109,15 +108,15 @@ class ItemMaskFragment : Fragment() {
                         title = binding.nameMask.text.toString()
                     )
                 )
-                navController.popBackStack()
-            } else if (binding.phoneMask.text.length == 7) {
+                navController.navigate(R.id.masksListFragment)
+            } else if (binding.phoneMask.text.length == expectedNumberSize) {
                 viewModel.insert(
                     Mask(
                         numeric = binding.phoneMask.text.toString(),
                         title = binding.nameMask.text.toString()
                     )
                 )
-                navController.popBackStack()
+                navController.navigate(R.id.masksListFragment)
             } else {
                 binding.phoneMask.error = phoneNumberAlertText
             }
@@ -127,7 +126,7 @@ class ItemMaskFragment : Fragment() {
             if (maskItem != null) {
                 viewModel.delete(maskItem!!.id)
             }
-            navController.popBackStack()
+            navController.navigate(R.id.masksListFragment)
         }
     }
 
