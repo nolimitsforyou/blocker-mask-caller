@@ -2,9 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/add_new_mask"
-        android:title="Add New" />
-    <item
         android:id="@+id/delete_all_masks"
-        android:title="Delete All" />
+        android:title="@string/menu_item_delete_all" />
 </menu>

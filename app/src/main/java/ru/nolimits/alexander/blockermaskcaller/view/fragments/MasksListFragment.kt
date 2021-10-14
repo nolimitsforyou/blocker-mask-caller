@@ -38,10 +38,6 @@ class MasksListFragment @Inject constructor() : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.add_new_mask -> {
-                findNavController().navigate(R.id.itemMaskFragment)
-                true
-            }
             R.id.delete_all_masks -> {
                 viewModel.deleteAll()
                 true
@@ -93,6 +89,10 @@ class MasksListFragment @Inject constructor() : Fragment() {
         bindingRecyclerView.masksRecyclerview.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = adapterMasks
+        }
+
+        bindingRecyclerView.buttonCreateNew.setOnClickListener {
+            findNavController().navigate(R.id.itemMaskFragment)
         }
 
         viewModel.allMasks.observe(viewLifecycleOwner, {
