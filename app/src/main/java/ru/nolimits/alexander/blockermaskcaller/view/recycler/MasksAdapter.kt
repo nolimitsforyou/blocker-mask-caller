@@ -1,6 +1,8 @@
 package ru.nolimits.alexander.blockermaskcaller.view.recycler
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
@@ -11,6 +13,8 @@ class MasksAdapter(
     var masksList: List<Mask> = listOf(),
     val callback: Callback
 ) : RecyclerView.Adapter<MasksAdapter.MaskHolder>() {
+
+    var selectedList = mutableListOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaskHolder {
 
@@ -31,12 +35,22 @@ class MasksAdapter(
                     callback.onItemClicked(masksList[bindingAdapterPosition])
                 }
             }
+            itemView.setOnLongClickListener {
+                binding.checkBox.apply {
+                    visibility = View.VISIBLE
+                    isChecked = true
+                }
+                //добавляем в список отмеченных чекбоксом
+                selectedList.add(masksList[bindingAdapterPosition].id)
+                true
+            }
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun refreshPhoneMasks(masks: List<Mask>) {
         this.masksList = masks
-        notifyDataSetChanged()
+        notifyDataSetChanged() //TODO переделать на notifyItemChanged() ?
     }
 
     override fun getItemCount(): Int = masksList.size
