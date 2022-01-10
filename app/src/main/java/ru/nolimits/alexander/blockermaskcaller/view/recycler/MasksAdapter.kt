@@ -36,7 +36,6 @@ class MasksAdapter(
                 if (showCheckbox) {
                     binding.checkBox.visibility = View.VISIBLE
                 }
-
                 if (binding.checkBox.isChecked) {
                     //если чекбокс установлен - добавляем элемент в список
                     selectedList.add(this.id)
