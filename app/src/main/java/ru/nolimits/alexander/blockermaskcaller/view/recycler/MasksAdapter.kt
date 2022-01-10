@@ -14,7 +14,8 @@ class MasksAdapter(
     val callback: Callback
 ) : RecyclerView.Adapter<MasksAdapter.MaskHolder>() {
 
-    var selectedList = mutableListOf<Int>()
+    private val selectedList = mutableListOf<Int>()
+    private var showCheckbox: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaskHolder {
 
@@ -25,10 +26,24 @@ class MasksAdapter(
     }
 
     override fun onBindViewHolder(holder: MaskHolder, position: Int) {
+
         with(holder) {
             with(masksList[position]) {
+
                 binding.phoneMaskName.text = this.title
                 binding.phoneMaskNumber.text = this.numeric
+
+                if (showCheckbox) {
+                    binding.checkBox.visibility = View.VISIBLE
+                }
+
+                if (binding.checkBox.isChecked) {
+                    //если чекбокс установлен - добавляем элемент в список
+                    selectedList.add(this.id)
+                } else {
+                    //если чекбокс не установлен - удаляем элемент из списка
+                    selectedList.remove(this.id)
+                }
             }
             itemView.setOnClickListener {
                 if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
@@ -39,9 +54,11 @@ class MasksAdapter(
                 binding.checkBox.apply {
                     visibility = View.VISIBLE
                     isChecked = true
+                    showCheckbox = true
                 }
                 //добавляем в список отмеченных чекбоксом
                 selectedList.add(masksList[bindingAdapterPosition].id)
+                notifyDataSetChanged()
                 true
             }
         }
