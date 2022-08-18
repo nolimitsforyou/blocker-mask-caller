@@ -10,4 +10,6 @@
     <color name="item_recycle_view_background">#F8F7F7</color>
     <color name="view_mask_details_background">#F8F7F7</color>
     <color name="default_button_color">#D2D9D1</color>
+    <color name="stroke_color">#BBB6B6</color>
+
 </resources>
