@@ -19,11 +19,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="300dp"
-        app:dotsColor="@color/purple_200"
+        app:dotsColor="@color/pager_dot_color"
         app:dotsCornerRadius="8dp"
         app:dotsSize="16dp"
         app:dotsSpacing="4dp"
-        app:dotsStrokeColor="@color/purple_200"
+        app:dotsStrokeColor="@color/stroke_color"
         app:dotsStrokeWidth="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/viewPagerEducation"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +31,7 @@
 
     <Button
         android:id="@+id/button_next"
+        style="@style/ButtonStyle"
         android:layout_width="120dp"
         android:layout_height="0dp"
         android:layout_marginEnd="32dp"
