@@ -1,12 +1,12 @@
 package ru.nolimits.alexander.blockermaskcaller.view.recycler
 
 import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.recyclerview.widget.RecyclerView
+import ru.nolimits.alexander.blockermaskcaller.R
 import ru.nolimits.alexander.blockermaskcaller.data.Mask
 import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListItemBinding
+import ru.nolimits.alexander.blockermaskcaller.view.fragments.MasksListFragment
 
 
 class MasksAdapter(
@@ -57,6 +57,7 @@ class MasksAdapter(
                 }
                 //добавляем в список отмеченных чекбоксом
                 selectedList.add(masksList[bindingAdapterPosition].id)
+                callback.onLongItemClicked()
                 notifyDataSetChanged()
                 true
             }
@@ -76,5 +77,6 @@ class MasksAdapter(
 
     interface Callback {
         fun onItemClicked(item: Mask)
+        fun onLongItemClicked()
     }
 }

@@ -30,9 +30,12 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private var _bindingRecyclerView: FragmentListMasksBinding? = null
     private val bindingRecyclerView get() = _bindingRecyclerView!!
     private lateinit var viewModel: ListMasksViewModel
+    private lateinit var menuItemDeleteSelected: MenuItem
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_masks, menu)
+        menuItemDeleteSelected = menu.findItem(R.id.delete_selected_masks)
+        menuItemDeleteSelected.isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -69,13 +72,13 @@ class MasksListFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.allMasks.observe(viewLifecycleOwner, {
+        viewModel.allMasks.observe(viewLifecycleOwner) {
             it?.let {
                 if (it.isEmpty()) {
                     findNavController().navigate(R.id.emptyMasksFragment)
                 }
             }
-        })
+        }
 
         val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
             override fun onItemClicked(item: Mask) {
@@ -83,6 +86,9 @@ class MasksListFragment @Inject constructor() : Fragment() {
                     MasksListFragmentDirections
                         .actionMasksListFragmentToItemMaskFragment(item)
                 )
+            }
+            override fun onLongItemClicked() {
+                menuItemDeleteSelected.isVisible = true
             }
         })
 
@@ -95,11 +101,11 @@ class MasksListFragment @Inject constructor() : Fragment() {
             findNavController().navigate(R.id.itemMaskFragment)
         }
 
-        viewModel.allMasks.observe(viewLifecycleOwner, {
+        viewModel.allMasks.observe(viewLifecycleOwner) {
             it?.let {
                 adapterMasks.refreshPhoneMasks(it)
             }
-        })
+        }
         setRecyclerViewItemTouchListener()
         checkPermission()
     }

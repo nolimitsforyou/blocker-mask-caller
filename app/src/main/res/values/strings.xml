@@ -19,5 +19,6 @@
     <string name="not_now">позже</string>
     <string name="skip_education">пропустить</string>
     <string name="next_education">далее</string>
-    <string name="menu_item_delete_all">delete all</string>
+    <string name="menu_item_delete_all">Удалить все</string>
+    <string name="menu_item_delete_selected">Удалить выбранные</string>
 </resources>
