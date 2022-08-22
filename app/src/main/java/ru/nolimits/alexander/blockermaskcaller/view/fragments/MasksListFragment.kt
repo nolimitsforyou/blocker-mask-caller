@@ -29,6 +29,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private val requestCodeReadPhoneState = 1
     private var _bindingRecyclerView: FragmentListMasksBinding? = null
     private val bindingRecyclerView get() = _bindingRecyclerView!!
+    private val selectedList = mutableListOf<Int>()
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var menuItemDeleteSelected: MenuItem
 
@@ -43,6 +44,10 @@ class MasksListFragment @Inject constructor() : Fragment() {
         return when (item.itemId) {
             R.id.delete_all_masks -> {
                 viewModel.deleteAll()
+                true
+            }
+            R.id.delete_selected_masks -> {
+                viewModel.deleteSelected(selectedList)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -89,6 +94,10 @@ class MasksListFragment @Inject constructor() : Fragment() {
             }
             override fun onLongItemClicked() {
                 menuItemDeleteSelected.isVisible = true
+            }
+
+            override fun checkBoxClicked(item: Mask) {
+                selectedList.add(item.id)
             }
         })
 

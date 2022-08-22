@@ -36,6 +36,12 @@ class MasksRepository @Inject constructor(private val masksDao: MaskDao) {
         }
     }
 
+    suspend fun deleteSelected(listIds: List<Int>) {
+        withContext(Dispatchers.IO) {
+            masksDao.deleteSelected(listIds)
+        }
+    }
+
     suspend fun getMaskByNumber(number: Int): Mask? {
         return withContext(Dispatchers.IO) {
             masksDao.getMaskByNumeric(number)

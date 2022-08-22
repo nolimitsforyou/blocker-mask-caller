@@ -28,6 +28,12 @@ class ListMasksViewModel @Inject constructor(private val repository: MasksReposi
         }
     }
 
+    fun deleteSelected(listIds: List<Int>) {
+        viewModelScope.launch {
+            repository.deleteSelected(listIds)
+        }
+    }
+
     fun delete(id: Int) {
         viewModelScope.launch {
             repository.delete(id)

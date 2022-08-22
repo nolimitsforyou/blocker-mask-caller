@@ -21,6 +21,9 @@ interface MaskDao {
     @Query("DELETE FROM masks_table")
     fun deleteAll()
 
+    @Query("DELETE FROM masks_table WHERE id in (:listIds)")
+    fun deleteSelected(listIds: List<Int>)
+
     @Query("SELECT * FROM masks_table WHERE numeric = :number")
     fun getMaskByNumeric(number: Int): Mask?
 
