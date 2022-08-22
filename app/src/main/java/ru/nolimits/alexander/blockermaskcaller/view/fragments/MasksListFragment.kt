@@ -96,8 +96,12 @@ class MasksListFragment @Inject constructor() : Fragment() {
                 menuItemDeleteSelected.isVisible = true
             }
 
-            override fun checkBoxClicked(item: Mask) {
-                selectedList.add(item.id)
+            override fun checkBoxClicked(item: Mask, isChecked: Boolean) {
+                if (isChecked) {
+                    selectedList.add(item.id)
+                } else {
+                    selectedList.remove(item.id)
+                }
             }
         })
 

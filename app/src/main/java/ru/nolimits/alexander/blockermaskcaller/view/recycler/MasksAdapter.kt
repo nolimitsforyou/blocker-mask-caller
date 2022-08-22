@@ -37,7 +37,7 @@ class MasksAdapter(
                 binding.phoneMaskNumber.text = this.numeric
                 binding.checkBox.setOnCheckedChangeListener(null)
                 binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
-                    callback.checkBoxClicked(masksList[position])
+                    callback.checkBoxClicked(masksList[position], isChecked)
                 }
             }
 
@@ -74,6 +74,6 @@ class MasksAdapter(
     interface Callback {
         fun onItemClicked(item: Mask)
         fun onLongItemClicked()
-        fun checkBoxClicked(item: Mask)
+        fun checkBoxClicked(item: Mask, isChecked: Boolean)
     }
 }
