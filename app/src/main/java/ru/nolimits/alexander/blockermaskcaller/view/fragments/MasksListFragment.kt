@@ -48,6 +48,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
             }
             R.id.delete_selected_masks -> {
                 viewModel.deleteSelected(selectedList)
+                selectedList.clear()
                 true
             }
             else -> super.onOptionsItemSelected(item)
