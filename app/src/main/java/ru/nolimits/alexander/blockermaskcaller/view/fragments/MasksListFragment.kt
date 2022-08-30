@@ -99,9 +99,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
                     } else {
                         selectedList.remove(item)
                     }
-                    if(selectedList.isNotEmpty()) {
-                        menuItemDeleteSelected.isVisible = true
-                    }
+                    menuItemDeleteSelected.isVisible = selectedList.isNotEmpty()
                 }
             },
             selectedList = selectedList
