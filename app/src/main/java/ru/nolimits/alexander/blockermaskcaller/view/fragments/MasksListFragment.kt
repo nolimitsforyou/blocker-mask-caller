@@ -93,16 +93,14 @@ class MasksListFragment @Inject constructor() : Fragment() {
                             .actionMasksListFragmentToItemMaskFragment(item)
                     )
                 }
-
-                override fun onLongItemClicked() {
-                    menuItemDeleteSelected.isVisible = true
-                }
-
                 override fun checkBoxClicked(item: Mask, isChecked: Boolean) {
                     if (isChecked) {
                         selectedList.add(item)
                     } else {
                         selectedList.remove(item)
+                    }
+                    if(selectedList.isNotEmpty()) {
+                        menuItemDeleteSelected.isVisible = true
                     }
                 }
             },

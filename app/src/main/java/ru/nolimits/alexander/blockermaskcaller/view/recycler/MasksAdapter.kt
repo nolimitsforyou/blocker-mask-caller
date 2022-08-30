@@ -55,7 +55,6 @@ class MasksAdapter(
                     isChecked = true
                     showCheckbox = true
                 }
-                callback.onLongItemClicked()
                 notifyDataSetChanged()
                 true
             }
@@ -77,7 +76,6 @@ class MasksAdapter(
 
     interface Callback {
         fun onItemClicked(item: Mask)
-        fun onLongItemClicked()
         fun checkBoxClicked(item: Mask, isChecked: Boolean)
     }
 }
