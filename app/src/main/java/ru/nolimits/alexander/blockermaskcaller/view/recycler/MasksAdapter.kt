@@ -35,7 +35,6 @@ class MasksAdapter(
             with(masksList[position]) {
                 binding.phoneMaskName.text = this.title
                 binding.phoneMaskNumber.text = this.numeric
-                binding.checkBox.setOnCheckedChangeListener(null)
                 binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
                     callback.checkBoxClicked(masksList[position], isChecked)
                 }
