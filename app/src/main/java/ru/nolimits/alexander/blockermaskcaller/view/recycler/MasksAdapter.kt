@@ -11,6 +11,7 @@ import ru.nolimits.alexander.blockermaskcaller.databinding.FragmentListItemBindi
 
 class MasksAdapter(
     var masksList: List<Mask> = listOf(),
+    var selectedList: List<Mask>,
     val callback: Callback
 ) : RecyclerView.Adapter<MasksAdapter.MaskHolder>() {
 
@@ -38,6 +39,8 @@ class MasksAdapter(
                 binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
                     callback.checkBoxClicked(masksList[position], isChecked)
                 }
+                //проверяем отмечен ли элемент чекбоксом
+                binding.checkBox.isChecked = selectedList.contains(masksList[position])
             }
 
             itemView.setOnClickListener {
@@ -58,6 +61,8 @@ class MasksAdapter(
             }
         }
     }
+
+
 
     @SuppressLint("NotifyDataSetChanged")
     fun refreshPhoneMasks(masks: List<Mask>) {

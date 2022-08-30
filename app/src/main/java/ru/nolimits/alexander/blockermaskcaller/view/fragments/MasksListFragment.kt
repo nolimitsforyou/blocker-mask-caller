@@ -30,7 +30,6 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private var _bindingRecyclerView: FragmentListMasksBinding? = null
     private val bindingRecyclerView get() = _bindingRecyclerView!!
     private val selectedList = mutableListOf<Mask>()
-    private var mapMaskIsChecked = mutableMapOf<Mask, Boolean>()
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var menuItemDeleteSelected: MenuItem
 
@@ -86,26 +85,29 @@ class MasksListFragment @Inject constructor() : Fragment() {
             }
         }
 
-        val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
-            override fun onItemClicked(item: Mask) {
-                findNavController().navigate(
-                    MasksListFragmentDirections
-                        .actionMasksListFragmentToItemMaskFragment(item)
-                )
-            }
-
-            override fun onLongItemClicked() {
-                menuItemDeleteSelected.isVisible = true
-            }
-
-            override fun checkBoxClicked(item: Mask, isChecked: Boolean) {
-                if (isChecked) {
-                    selectedList.add(item)
-                } else {
-                    selectedList.remove(item)
+        val adapterMasks = MasksAdapter(
+            callback = object : MasksAdapter.Callback {
+                override fun onItemClicked(item: Mask) {
+                    findNavController().navigate(
+                        MasksListFragmentDirections
+                            .actionMasksListFragmentToItemMaskFragment(item)
+                    )
                 }
-            }
-        })
+
+                override fun onLongItemClicked() {
+                    menuItemDeleteSelected.isVisible = true
+                }
+
+                override fun checkBoxClicked(item: Mask, isChecked: Boolean) {
+                    if (isChecked) {
+                        selectedList.add(item)
+                    } else {
+                        selectedList.remove(item)
+                    }
+                }
+            },
+            selectedList = selectedList
+        )
 
         bindingRecyclerView.masksRecyclerview.apply {
             layoutManager = LinearLayoutManager(activity)
