@@ -15,7 +15,7 @@ class MasksAdapter(
     val callback: Callback
 ) : RecyclerView.Adapter<MasksAdapter.MaskHolder>() {
 
-    private var showCheckbox: Boolean = false
+    var showCheckbox: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaskHolder {
 
@@ -31,6 +31,8 @@ class MasksAdapter(
 
             if (showCheckbox) {
                 binding.checkBox.visibility = View.VISIBLE
+            } else {
+                binding.checkBox.visibility = View.INVISIBLE
             }
 
             with(masksList[position]) {

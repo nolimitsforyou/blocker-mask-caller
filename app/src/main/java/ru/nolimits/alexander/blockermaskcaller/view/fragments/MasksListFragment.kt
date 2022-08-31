@@ -32,6 +32,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private val selectedList = mutableListOf<Mask>()
     private lateinit var viewModel: ListMasksViewModel
     private lateinit var menuItemDeleteSelected: MenuItem
+    private lateinit var adapterMasks: MasksAdapter
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_masks, menu)
@@ -48,6 +49,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
             }
             R.id.delete_selected_masks -> {
                 viewModel.deleteSelected(selectedList)
+                adapterMasks.showCheckbox = false
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -85,7 +87,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
             }
         }
 
-        val adapterMasks = MasksAdapter(
+        adapterMasks = MasksAdapter(
             callback = object : MasksAdapter.Callback {
                 override fun onItemClicked(item: Mask) {
                     findNavController().navigate(
