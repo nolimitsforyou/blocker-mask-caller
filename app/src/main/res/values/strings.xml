@@ -3,7 +3,7 @@
     <string name="name_mask">Имя</string>
     <string name="alert_phone_number">"введите не менее 7 цифр номера"</string>
     <string name="phone_number_placeholder">7 999 888</string>
-    <string name="button_ok">ok</string>
+    <string name="button_ok">OK</string>
     <string name="button_save">сохранить</string>
     <string name="button_delete">удалить</string>
     <string name="button_cancel">отменить</string>
@@ -12,11 +12,14 @@
     <string name="alert_dialog_message">
         Для корректной работы Blocker Mask Caller необходимо предоставить ему разрешение на доступ к телефону
     </string>
-    <string name="empty_mask_text">У Вас пока нет ни одного префикса телефонного номера для блокирования вызовов.
-        Добавьте первую "маску" для блокировки вызовов по совпадению первых 7 цифр телефонного номера
+    <string name="empty_mask_text_1">У Вас пока нет ни одного префикса телефонного номера для блокирования вызовов.\nДобавьте первую "маску" для блокировки вызовов по совпадению первых 7 цифр телефонного номера
+    </string>
+    <string name="empty_mask_text_2">Номер телефона, начало которого будет соответсвовать первым 7ми цифрам маски,будет заблокирован.\nПример:\nВы добавили "маску" +7 999 888.\nВам звонит абонент с номером +7 999 888 77 66 - Такой вызов будет заблокирован
     </string>
     <string name="create_new">создать</string>
     <string name="not_now">позже</string>
     <string name="skip_education">пропустить</string>
     <string name="next_education">далее</string>
+    <string name="menu_item_delete_all">Удалить все</string>
+    <string name="menu_item_delete_selected">Удалить выбранные</string>
 </resources>

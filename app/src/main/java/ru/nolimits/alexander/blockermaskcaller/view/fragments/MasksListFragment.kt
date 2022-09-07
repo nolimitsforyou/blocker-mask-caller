@@ -29,21 +29,27 @@ class MasksListFragment @Inject constructor() : Fragment() {
     private val requestCodeReadPhoneState = 1
     private var _bindingRecyclerView: FragmentListMasksBinding? = null
     private val bindingRecyclerView get() = _bindingRecyclerView!!
+    private val selectedList = mutableListOf<Mask>()
     private lateinit var viewModel: ListMasksViewModel
+    private lateinit var menuItemDeleteSelected: MenuItem
+    private lateinit var adapterMasks: MasksAdapter
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_masks, menu)
+        menuItemDeleteSelected = menu.findItem(R.id.delete_selected_masks)
+        menuItemDeleteSelected.isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.add_new_mask -> {
-                findNavController().navigate(R.id.itemMaskFragment)
-                true
-            }
             R.id.delete_all_masks -> {
                 viewModel.deleteAll()
+                true
+            }
+            R.id.delete_selected_masks -> {
+                viewModel.deleteSelected(selectedList)
+                adapterMasks.showCheckbox = false
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -73,33 +79,48 @@ class MasksListFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.allMasks.observe(viewLifecycleOwner, {
+        viewModel.allMasks.observe(viewLifecycleOwner) {
             it?.let {
                 if (it.isEmpty()) {
                     findNavController().navigate(R.id.emptyMasksFragment)
                 }
             }
-        })
+        }
 
-        val adapterMasks = MasksAdapter(callback = object : MasksAdapter.Callback {
-            override fun onItemClicked(item: Mask) {
-                findNavController().navigate(
-                    MasksListFragmentDirections
-                        .actionMasksListFragmentToItemMaskFragment(item)
-                )
-            }
-        })
+        adapterMasks = MasksAdapter(
+            callback = object : MasksAdapter.Callback {
+                override fun onItemClicked(item: Mask) {
+                    findNavController().navigate(
+                        MasksListFragmentDirections
+                            .actionMasksListFragmentToItemMaskFragment(item)
+                    )
+                }
+                override fun checkBoxClicked(item: Mask, isChecked: Boolean) {
+                    if (isChecked) {
+                        selectedList.add(item)
+                    } else {
+                        selectedList.remove(item)
+                    }
+                    menuItemDeleteSelected.isVisible = selectedList.isNotEmpty()
+                }
+            },
+            selectedList = selectedList
+        )
 
         bindingRecyclerView.masksRecyclerview.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = adapterMasks
         }
 
-        viewModel.allMasks.observe(viewLifecycleOwner, {
+        bindingRecyclerView.buttonCreateNew.setOnClickListener {
+            findNavController().navigate(R.id.itemMaskFragment)
+        }
+
+        viewModel.allMasks.observe(viewLifecycleOwner) {
             it?.let {
                 adapterMasks.refreshPhoneMasks(it)
             }
-        })
+        }
         setRecyclerViewItemTouchListener()
         checkPermission()
     }
