@@ -95,6 +95,7 @@ class MasksListFragment @Inject constructor() : Fragment() {
                             .actionMasksListFragmentToItemMaskFragment(item)
                     )
                 }
+
                 override fun checkBoxClicked(item: Mask, isChecked: Boolean) {
                     if (isChecked) {
                         selectedList.add(item)

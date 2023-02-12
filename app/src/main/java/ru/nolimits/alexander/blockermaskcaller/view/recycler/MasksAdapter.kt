@@ -64,7 +64,6 @@ class MasksAdapter(
     }
 
 
-
     @SuppressLint("NotifyDataSetChanged")
     fun refreshPhoneMasks(masks: List<Mask>) {
         this.masksList = masks
